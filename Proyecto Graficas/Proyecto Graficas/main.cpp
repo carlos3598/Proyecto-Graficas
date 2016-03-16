@@ -3,6 +3,8 @@
 //  Proyecto Graficas
 //
 //  Created by Carlos Salazar on 3/15/16.
+//  Authors: Balbina Santana A00812215
+//           Carlos Salazar A00809015
 //  Copyright © 2016 Carlos Salazar. All rights reserved.
 //
 
@@ -97,11 +99,12 @@ void dibuja()
     glTranslated(0, -12, 0);
     glutSolidSphere(1, 20, 20);
     
-    glPushMatrix();
-    glScalef(0.3, 0.4, 0.4);
-    glTranslated(2, 2, 0);
-    glutSolidSphere(1, 20, 20);
-    glPopMatrix();
+        //Weapon
+        glPushMatrix();
+        glScalef(0.3, 0.4, 0.4);
+        glTranslated(2, 2, 0);
+        glutSolidSphere(1, 20, 20);
+        glPopMatrix();
     
     glPopMatrix();
     
