@@ -1,0 +1,252 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FD65A4441C9936F7005CF9C1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD65A4431C9936F7005CF9C1 /* main.cpp */; };
+		FD65A44B1C99371B005CF9C1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD65A44A1C99371B005CF9C1 /* OpenGL.framework */; };
+		FD65A44D1C99371F005CF9C1 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD65A44C1C99371F005CF9C1 /* GLUT.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FD65A43E1C9936F7005CF9C1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		FD65A4401C9936F7005CF9C1 /* Proyecto Graficas */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Proyecto Graficas"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD65A4431C9936F7005CF9C1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		FD65A44A1C99371B005CF9C1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		FD65A44C1C99371F005CF9C1 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FD65A43D1C9936F7005CF9C1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD65A44D1C99371F005CF9C1 /* GLUT.framework in Frameworks */,
+				FD65A44B1C99371B005CF9C1 /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FD65A4371C9936F7005CF9C1 = {
+			isa = PBXGroup;
+			children = (
+				FD65A44C1C99371F005CF9C1 /* GLUT.framework */,
+				FD65A44A1C99371B005CF9C1 /* OpenGL.framework */,
+				FD65A4421C9936F7005CF9C1 /* Proyecto Graficas */,
+				FD65A4411C9936F7005CF9C1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FD65A4411C9936F7005CF9C1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FD65A4401C9936F7005CF9C1 /* Proyecto Graficas */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FD65A4421C9936F7005CF9C1 /* Proyecto Graficas */ = {
+			isa = PBXGroup;
+			children = (
+				FD65A4431C9936F7005CF9C1 /* main.cpp */,
+			);
+			path = "Proyecto Graficas";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FD65A43F1C9936F7005CF9C1 /* Proyecto Graficas */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FD65A4471C9936F7005CF9C1 /* Build configuration list for PBXNativeTarget "Proyecto Graficas" */;
+			buildPhases = (
+				FD65A43C1C9936F7005CF9C1 /* Sources */,
+				FD65A43D1C9936F7005CF9C1 /* Frameworks */,
+				FD65A43E1C9936F7005CF9C1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Proyecto Graficas";
+			productName = "Proyecto Graficas";
+			productReference = FD65A4401C9936F7005CF9C1 /* Proyecto Graficas */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FD65A4381C9936F7005CF9C1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Carlos Salazar";
+				TargetAttributes = {
+					FD65A43F1C9936F7005CF9C1 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+				};
+			};
+			buildConfigurationList = FD65A43B1C9936F7005CF9C1 /* Build configuration list for PBXProject "Proyecto Graficas" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FD65A4371C9936F7005CF9C1;
+			productRefGroup = FD65A4411C9936F7005CF9C1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FD65A43F1C9936F7005CF9C1 /* Proyecto Graficas */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FD65A43C1C9936F7005CF9C1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD65A4441C9936F7005CF9C1 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		FD65A4451C9936F7005CF9C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		FD65A4461C9936F7005CF9C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		FD65A4481C9936F7005CF9C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FD65A4491C9936F7005CF9C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FD65A43B1C9936F7005CF9C1 /* Build configuration list for PBXProject "Proyecto Graficas" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD65A4451C9936F7005CF9C1 /* Debug */,
+				FD65A4461C9936F7005CF9C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FD65A4471C9936F7005CF9C1 /* Build configuration list for PBXNativeTarget "Proyecto Graficas" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD65A4481C9936F7005CF9C1 /* Debug */,
+				FD65A4491C9936F7005CF9C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FD65A4381C9936F7005CF9C1 /* Project object */;
+}
