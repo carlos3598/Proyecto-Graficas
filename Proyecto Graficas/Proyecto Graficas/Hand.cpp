@@ -1,15 +1,14 @@
 //
-//  Drug.cpp
+//  Hand.cpp
 //  Proyecto Graficas
 //
 //  Created by Balbina Santana on 3/16/16.
 //  Copyright © 2016 Carlos Salazar. All rights reserved.
 //
 
-#include "Drug.h"
+#include "Hand.h"
 
-Drug::Drug() {
-    scaleX = 0.3;
-    scaleY = 0.3;
-    
+Hand::Hand() {
+    scaleX = 0.15;
+    scaleY = 0.15;
 }

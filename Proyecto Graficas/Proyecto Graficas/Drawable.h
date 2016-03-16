@@ -28,4 +28,8 @@ private:
     float y;
     int texture;
     
+protected:
+    float scaleX;
+    float scaleY;
+    
 };

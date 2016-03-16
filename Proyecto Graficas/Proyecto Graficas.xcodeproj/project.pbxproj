@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		37EAC3DB1C9A066600F20112 /* Drawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37EAC3D91C9A066600F20112 /* Drawable.cpp */; };
 		37EAC3DE1C9A0A9500F20112 /* Drug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37EAC3DC1C9A0A9500F20112 /* Drug.cpp */; };
+		37EAC3E11C9A0F8500F20112 /* Juan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37EAC3DF1C9A0F8500F20112 /* Juan.cpp */; };
+		37EAC3E41C9A10D400F20112 /* Hand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37EAC3E21C9A10D400F20112 /* Hand.cpp */; };
 		FD65A4441C9936F7005CF9C1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD65A4431C9936F7005CF9C1 /* main.cpp */; };
 		FD65A44B1C99371B005CF9C1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD65A44A1C99371B005CF9C1 /* OpenGL.framework */; };
 		FD65A44D1C99371F005CF9C1 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD65A44C1C99371F005CF9C1 /* GLUT.framework */; };
@@ -31,6 +33,10 @@
 		37EAC3D91C9A066600F20112 /* Drawable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Drawable.cpp; sourceTree = "<group>"; };
 		37EAC3DC1C9A0A9500F20112 /* Drug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Drug.cpp; sourceTree = "<group>"; };
 		37EAC3DD1C9A0A9500F20112 /* Drug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drug.h; sourceTree = "<group>"; };
+		37EAC3DF1C9A0F8500F20112 /* Juan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Juan.cpp; sourceTree = "<group>"; };
+		37EAC3E01C9A0F8500F20112 /* Juan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Juan.h; sourceTree = "<group>"; };
+		37EAC3E21C9A10D400F20112 /* Hand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hand.cpp; sourceTree = "<group>"; };
+		37EAC3E31C9A10D400F20112 /* Hand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hand.h; sourceTree = "<group>"; };
 		FD65A4401C9936F7005CF9C1 /* Proyecto Graficas */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Proyecto Graficas"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD65A4431C9936F7005CF9C1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		FD65A44A1C99371B005CF9C1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -72,10 +78,14 @@
 			isa = PBXGroup;
 			children = (
 				FD65A4431C9936F7005CF9C1 /* main.cpp */,
+				37EAC3E21C9A10D400F20112 /* Hand.cpp */,
+				37EAC3E31C9A10D400F20112 /* Hand.h */,
+				37EAC3DF1C9A0F8500F20112 /* Juan.cpp */,
+				37EAC3E01C9A0F8500F20112 /* Juan.h */,
 				37EAC3D81C9A051400F20112 /* Drawable.h */,
+				37EAC3D91C9A066600F20112 /* Drawable.cpp */,
 				37EAC3DC1C9A0A9500F20112 /* Drug.cpp */,
 				37EAC3DD1C9A0A9500F20112 /* Drug.h */,
-				37EAC3D91C9A066600F20112 /* Drawable.cpp */,
 			);
 			path = "Proyecto Graficas";
 			sourceTree = "<group>";
@@ -139,6 +149,8 @@
 				37EAC3DE1C9A0A9500F20112 /* Drug.cpp in Sources */,
 				FD65A4441C9936F7005CF9C1 /* main.cpp in Sources */,
 				37EAC3DB1C9A066600F20112 /* Drawable.cpp in Sources */,
+				37EAC3E11C9A0F8500F20112 /* Juan.cpp in Sources */,
+				37EAC3E41C9A10D400F20112 /* Hand.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

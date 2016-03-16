@@ -1,15 +1,18 @@
 //
-//  Drug.cpp
+//  Hand.hpp
 //  Proyecto Graficas
 //
 //  Created by Balbina Santana on 3/16/16.
 //  Copyright © 2016 Carlos Salazar. All rights reserved.
 //
 
-#include "Drug.h"
+#pragma once
 
-Drug::Drug() {
-    scaleX = 0.3;
-    scaleY = 0.3;
+#include "Drawable.h"
+
+class Hand: public Drawable {
     
-}
+public:
+    Hand();
+    
+};

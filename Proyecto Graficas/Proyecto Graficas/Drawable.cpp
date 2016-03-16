@@ -13,11 +13,13 @@ Drawable::Drawable() {
     x = 0;
     y = 0;
     texture = -1;
+    scaleX = 1;
+    scaleY = 1;
 }
 
 void Drawable::draw() {
     glPushMatrix();
-        glScalef(0.3, 0.3, 0.1);
+        glScalef(scaleX, scaleY, 0.1);
         glTranslated(x, y, 0);
         glutSolidCube(1);
     glPopMatrix();

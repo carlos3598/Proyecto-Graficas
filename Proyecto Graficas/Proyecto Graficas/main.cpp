@@ -18,10 +18,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "Drug.h"
+#include "Juan.h"
+#include "Hand.h"
 //Apuntadores a las lista
 
 char msg[20];
 Drug drugs[10][6];
+Juan juan;
+Hand hand;
 
 
 void init()
@@ -50,6 +54,12 @@ void init()
         }
     }
     
+    juan.setX(0);
+    juan.setY(-4);
+    
+    hand.setX(0);
+    hand.setY(-9.5);
+    
 }
 
 
@@ -63,20 +73,8 @@ void dibuja()
         }
     }
     
-    //Main Character
-    glPushMatrix();
-    glScalef(0.15, 0.15, 0.15);
-    glTranslated(0, -12, 0);
-    glutSolidSphere(1, 20, 20);
-    
-        //Weapon
-        glPushMatrix();
-        glScalef(0.3, 0.4, 0.4);
-        glTranslated(2, 2, 0);
-        glutSolidSphere(1, 20, 20);
-        glPopMatrix();
-    
-    glPopMatrix();
+    juan.draw();
+    hand.draw();
     
     glutSwapBuffers();
 }
