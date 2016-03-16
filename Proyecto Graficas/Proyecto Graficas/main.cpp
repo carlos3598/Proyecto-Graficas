@@ -17,9 +17,11 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include "Drug.h"
 //Apuntadores a las lista
 
 char msg[20];
+Drug drugs[10][6];
 
 
 void init()
@@ -41,6 +43,12 @@ void init()
     //cambiar el modo de mezcla
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 6; j++) {
+            drugs[i][j].setX(i * 1.2 - 5.5);
+            drugs[i][j].setY(j * 1.2);
+        }
+    }
     
 }
 
@@ -49,48 +57,10 @@ void dibuja()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    //First row
-    double fRow = 7.0;
-    while (fRow != -8) {
-        glPushMatrix();
-        glScalef(0.25, 0.25, 0.15);
-        glTranslated(fRow, 6, 0);
-        glutSolidCube(1);
-        glPopMatrix();
-        fRow = fRow - 1.5;
-    }
-    
-    //Second row
-    double sRow = 7.0;
-    while (sRow != -8) {
-        glPushMatrix();
-        glScalef(0.25, 0.25, 0.15);
-        glTranslated(sRow, 4.5, 0);
-        glutSolidCube(1);
-        glPopMatrix();
-        sRow = sRow - 1.5;
-    }
-    
-    //Third row
-    double tRow = 7.0;
-    while (tRow != -8) {
-        glPushMatrix();
-        glScalef(0.25, 0.25, 0.15);
-        glTranslated(tRow, 3, 0);
-        glutSolidCube(1);
-        glPopMatrix();
-        tRow = tRow - 1.5;
-    }
-    
-    //Fourth row
-    double fourRow = 7.0;
-    while (fourRow != -8) {
-        glPushMatrix();
-        glScalef(0.25, 0.25, 0.15);
-        glTranslated(fourRow, 1.5, 0);
-        glutSolidCube(1);
-        glPopMatrix();
-        fourRow = fourRow - 1.5;
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 6; j++) {
+            drugs[i][j].draw();
+        }
     }
     
     //Main Character
