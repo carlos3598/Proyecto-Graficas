@@ -19,8 +19,8 @@ Drawable::Drawable() {
 
 void Drawable::draw() {
     glPushMatrix();
-        glScalef(scaleX, scaleY, 0.1);
         glTranslated(x, y, 0);
+        glScalef(scaleX, scaleY, 0.1);
         glutSolidCube(1);
     glPopMatrix();
 }

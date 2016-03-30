@@ -49,16 +49,16 @@ void init()
     
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 6; j++) {
-            drugs[i][j].setX(i * 1.2 - 5.5);
-            drugs[i][j].setY(j * 1.2);
+            drugs[i][j].setX(i * 0.35 - 1.6);
+            drugs[i][j].setY(j * 0.35 - 0.2);
         }
     }
     
     juan.setX(0);
-    juan.setY(-4);
+    juan.setY(-1.7);
     
     hand.setX(0);
-    hand.setY(-9.5);
+    hand.setY(-1.5);
     
 }
 
@@ -120,13 +120,13 @@ void JuanMovement(int tecla, int x, int y)
 {
     switch (tecla) {
         case GLUT_KEY_RIGHT:
-            juan.setX(juan.getX() + 1);
-            hand.setX(hand.getX() + 1.5);
+            juan.setX(juan.getX() + 0.1);
+            hand.setX(hand.getX() + 0.1);
             glutPostRedisplay();
             break;
         case GLUT_KEY_LEFT :
-            juan.setX(juan.getX() - 1);
-            hand.setX(hand.getX() - 1.5);
+            juan.setX(juan.getX() - 0.1);
+            hand.setX(hand.getX() - 0.1);
             glutPostRedisplay();
             break;
     }
