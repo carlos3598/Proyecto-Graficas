@@ -10,7 +10,7 @@
 
 #include "Drawable.h"
 
-class Hand: public Drawable {
+class Hand: public Drawable  {
     
 public:
     Hand();

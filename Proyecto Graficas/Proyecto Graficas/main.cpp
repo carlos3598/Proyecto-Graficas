@@ -94,6 +94,44 @@ void reshape(int ancho, int alto)
     gluLookAt(0, 0, 3, 0, 0, 0, 0, 1, 0);
 }
 
+void menu(unsigned char theKey, int mouseX, int mouseY)
+{
+    switch (theKey)
+    {
+        case 'p':
+        case 'P':
+            break;
+        case 'b':
+        case 'B':
+            break;
+        case 'D':
+        case 'd':
+            break;
+        case 'E':
+        case 'e':
+            exit(-1);
+            //terminate the program
+        default:
+            break;		      // do nothing
+    }
+}
+
+void JuanMovement(int tecla, int x, int y)
+{
+    switch (tecla) {
+        case GLUT_KEY_RIGHT:
+            juan.setX(juan.getX() + 1);
+            hand.setX(hand.getX() + 1.5);
+            glutPostRedisplay();
+            break;
+        case GLUT_KEY_LEFT :
+            juan.setX(juan.getX() - 1);
+            hand.setX(hand.getX() - 1.5);
+            glutPostRedisplay();
+            break;
+    }
+}
+
 void mytimer(int i){
 }
 
@@ -107,6 +145,8 @@ int main(int argc, char *argv[])
     init();
     glutDisplayFunc(dibuja);
     glutReshapeFunc(reshape);
+    glutSpecialFunc(JuanMovement);
+    glutKeyboardFunc(menu);
     glutTimerFunc(100, mytimer, 1);
     glutMainLoop();
     return 0;
