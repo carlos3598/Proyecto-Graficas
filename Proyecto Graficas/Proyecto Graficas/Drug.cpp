@@ -9,7 +9,11 @@
 #include "Drug.h"
 
 Drug::Drug() {
-    scaleX = 0.3;
-    scaleY = 0.3;
+    scaleX = 0.2;
+    scaleY = 0.2;
     
+}
+
+void Drug::move(int direction){
+    setX(getX() + 0.1 * direction);
 }

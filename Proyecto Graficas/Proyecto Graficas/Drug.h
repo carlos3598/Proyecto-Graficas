@@ -14,5 +14,6 @@ class Drug: public Drawable {
  
 public:
     Drug();
-    
+    void move(int direction);
 };
+

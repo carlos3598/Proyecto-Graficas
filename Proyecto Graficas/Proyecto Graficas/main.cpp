@@ -26,6 +26,7 @@ char msg[20];
 Drug drugs[10][6];
 Juan juan;
 Hand hand;
+int direction;
 
 
 void init()
@@ -49,8 +50,8 @@ void init()
     
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 6; j++) {
-            drugs[i][j].setX(i * 0.35 - 1.6);
-            drugs[i][j].setY(j * 0.35 - 0.2);
+            drugs[i][j].setX(i * 0.25 - 1.15);
+            drugs[i][j].setY(j * 0.25 + 0.5);
         }
     }
     
@@ -59,6 +60,8 @@ void init()
     
     hand.setX(0);
     hand.setY(-1.5);
+    
+    direction = 1;
     
 }
 
@@ -133,6 +136,22 @@ void JuanMovement(int tecla, int x, int y)
 }
 
 void mytimer(int i){
+    bool crash = false;
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 6; j++) {
+            if(drugs[i][j].getX() > 2 || drugs[i][j].getX() < -2){
+                crash = true;
+                direction *= -1;
+                break;
+            }
+        }
+    }
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 6; j++) {
+            drugs[i][j].move(direction);
+        }
+    }
+    glutTimerFunc(100, mytimer, 1);
 }
 
 int main(int argc, char *argv[])
