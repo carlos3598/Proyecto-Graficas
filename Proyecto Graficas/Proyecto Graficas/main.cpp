@@ -34,9 +34,9 @@ int direction;
 
 //__FILE__ is a preprocessor macro that expands to full path to the current file.
 string fullPath = __FILE__;
-const int TEXTURE_COUNT=7;
+const int TEXTURE_COUNT=3;
 
-int angulo=0;
+int state=0;
 static GLuint texName[TEXTURE_COUNT];
 
 //le borramos el exceso para solo obtener el Path padre
@@ -88,24 +88,14 @@ void initRendering()
     
     
     char  ruta[200];
-    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/EducacionSexual.bmp");
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/fondo_Inicio.bmp");
     image = loadBMP(ruta);loadTexture(image,i++);
     
-    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/eligePersonaje.bmp");
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/fondo_Instrucciones.bmp");
     image = loadBMP(ruta);loadTexture(image,i++);
     
-    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/higiene_.bmp");
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/fondo_Salir.bmp");
     image = loadBMP(ruta);loadTexture(image,i++);
-    
-    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/paginaInicio.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
-    
-    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/ParqueBonito.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
-    
-    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/ParqueSucio.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
-    
     
     
     delete image;
@@ -151,27 +141,16 @@ void init()
 
 void dibuja()
 {
+    glClearColor(1.0,1.0,1.0,1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 6; j++) {
-            drugs[i][j].draw();
-        }
-    }
-    
-    juan.draw();
-    hand.draw();
-
-    if (angulo < 5) {
-        glClearColor(1.0,1.0,1.0,1.0);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    if (state < 3) {
         
         //Habilitar el uso de texturas
         glEnable(GL_TEXTURE_2D);
         
-        //Elegir la textura del Quads: angulo cambia con el timer
-        glBindTexture(GL_TEXTURE_2D, texName[angulo]);
+        //Elegir la textura del Quads: state cambia con el timer
+        glBindTexture(GL_TEXTURE_2D, texName[state]);
         
         glBegin(GL_QUADS);
         //Asignar la coordenada de textura 0,0 al vertice
@@ -187,6 +166,15 @@ void dibuja()
         glTexCoord2f(0.0f, 1.0f);
         glVertex3f(-10.0f, 10.0f, 0);
         glEnd();
+    }else{
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 6; j++) {
+                drugs[i][j].draw();
+            }
+        }
+        
+        juan.draw();
+        hand.draw();
     }
 
     
@@ -195,17 +183,37 @@ void dibuja()
 
 void reshape(int ancho, int alto)
 {
-    // Ventana
-    glViewport(0, 0, ancho, alto);
-    // Sistema de coordenadas
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(-2, 2, -2, 2,1,12 ); //izq, der, abajo, arriba, cerca, lejos
-    //glFrustum(-2, 2, -2, 2, 1, 12);
+    //Display for menu.
+    if (state < 3) {
+        
+        // Ventana
+        glViewport(0, 0, ancho, alto);
+        // Sistema de coordenadas
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(-10, 10, -10, 10,1,12 ); //izq, der, abajo, arriba, cerca, lejos
+        //glFrustum(-2, 2, -2, 2, 1, 12);
+        
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+        gluLookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
+    }
+    //Display for Game.
+    else{
+        
+        // Ventana
+        glViewport(0, 0, ancho, alto);
+        // Sistema de coordenadas
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(-2, 2, -2, 2,1,12 ); //izq, der, abajo, arriba, cerca, lejos
+        //glFrustum(-2, 2, -2, 2, 1, 12);
+        
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+        gluLookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
+    }
     
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    gluLookAt(0, 0, 3, 0, 0, 0, 0, 1, 0);
 }
 
 void menu(unsigned char theKey, int mouseX, int mouseY)
@@ -225,8 +233,25 @@ void menu(unsigned char theKey, int mouseX, int mouseY)
         case 'e':
             exit(-1);
             //terminate the program
+            break;
         default:
             break;		      // do nothing
+    }
+}
+
+void changeState(int change){
+    if (change > 0) {
+        state++;
+    }else{
+        state--;
+    }
+    
+    if (state >2) {
+        state = 2;
+    }
+    
+    if (state < 0) {
+        state = 0;
     }
 }
 
@@ -244,13 +269,23 @@ void JuanMovement(int tecla, int x, int y)
             glutPostRedisplay();
             break;
         case GLUT_KEY_UP:
-            angulo--;
+            changeState(-1);
             glutPostRedisplay();
             break;
         case GLUT_KEY_DOWN:
-            angulo++;
+            changeState(+1);
             glutPostRedisplay();
             break;
+        case 13:
+            if (state == 0) {
+                state = 3;
+                glutPostRedisplay();
+            }
+            break;
+        case 27:
+            exit(-1);
+            break;
+            
     }
 }
 
@@ -286,7 +321,8 @@ int main(int argc, char *argv[])
     glutDisplayFunc(dibuja);
     glutReshapeFunc(reshape);
     glutSpecialFunc(JuanMovement);
-    glutKeyboardFunc(menu);
+    
+    (menu);
     glutTimerFunc(100, mytimer, 1);
     glutMainLoop();
     return 0;
