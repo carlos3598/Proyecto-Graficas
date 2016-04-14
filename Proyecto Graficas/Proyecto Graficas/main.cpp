@@ -16,14 +16,14 @@
 #include <GL/glut.h>
 #endif
 #include <iostream>
-using namespace std;
 #include <stdlib.h>
 #include <stdio.h>
 #include "imageloader.h"
-
 #include "Drug.h"
 #include "Juan.h"
 #include "Hand.h"
+using namespace std;
+
 //Apuntadores a las lista
 
 char msg[20];
@@ -155,16 +155,16 @@ void dibuja()
         glBegin(GL_QUADS);
         //Asignar la coordenada de textura 0,0 al vertice
         glTexCoord2f(0.0f, 0.0f);
-        glVertex3f(-10.0f, -10.0f, 0);
+        glVertex3f(-2.0f, -2.0f, 0);
         //Asignar la coordenada de textura 1,0 al vertice
         glTexCoord2f(1.0f, 0.0f);
-        glVertex3f(10.0f, -10.0f, 0);
+        glVertex3f(2.0f, -2.0f, 0);
         //Asignar la coordenada de textura 1,1 al vertice
         glTexCoord2f(1.0f,1.0f);
-        glVertex3f(10.0f, 10.0f, 0);
+        glVertex3f(2.0f, 2.0f, 0);
         //Asignar la coordenada de textura 0,1 al vertice
         glTexCoord2f(0.0f, 1.0f);
-        glVertex3f(-10.0f, 10.0f, 0);
+        glVertex3f(-2.0f, 2.0f, 0);
         glEnd();
     }else{
         for (int i = 0; i < 10; i++) {
@@ -183,37 +183,18 @@ void dibuja()
 
 void reshape(int ancho, int alto)
 {
-    //Display for menu.
-    if (state < 3) {
-        
-        // Ventana
-        glViewport(0, 0, ancho, alto);
-        // Sistema de coordenadas
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        glOrtho(-10, 10, -10, 10,1,12 ); //izq, der, abajo, arriba, cerca, lejos
-        //glFrustum(-2, 2, -2, 2, 1, 12);
-        
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-        gluLookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
-    }
-    //Display for Game.
-    else{
-        
-        // Ventana
-        glViewport(0, 0, ancho, alto);
-        // Sistema de coordenadas
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        glOrtho(-2, 2, -2, 2,1,12 ); //izq, der, abajo, arriba, cerca, lejos
-        //glFrustum(-2, 2, -2, 2, 1, 12);
-        
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-        gluLookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
-    }
     
+    // Ventana
+    glViewport(0, 0, ancho, alto);
+    // Sistema de coordenadas
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(-2, 2, -2, 2,1,12 ); //izq, der, abajo, arriba, cerca, lejos
+    //glFrustum(-2, 2, -2, 2, 1, 12);
+    
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    gluLookAt(0, 0, 1.1, 0, 0, 0, 0, 1, 0);
 }
 
 void menu(unsigned char theKey, int mouseX, int mouseY)
@@ -269,17 +250,24 @@ void JuanMovement(int tecla, int x, int y)
             glutPostRedisplay();
             break;
         case GLUT_KEY_UP:
-            changeState(-1);
+            if (state != 3) {
+                changeState(-1);
+            }
             glutPostRedisplay();
             break;
         case GLUT_KEY_DOWN:
-            changeState(+1);
+            if (state != 3) {
+                changeState(+1);
+            }
             glutPostRedisplay();
             break;
         case 13:
             if (state == 0) {
                 state = 3;
                 glutPostRedisplay();
+            }
+            if (state == 2) {
+                exit(-1);
             }
             break;
         case 27:
@@ -306,6 +294,7 @@ void mytimer(int i){
         }
     }
     glutTimerFunc(100, mytimer, 1);
+    glutPostRedisplay();
 }
 
 int main(int argc, char *argv[])
@@ -321,8 +310,6 @@ int main(int argc, char *argv[])
     glutDisplayFunc(dibuja);
     glutReshapeFunc(reshape);
     glutSpecialFunc(JuanMovement);
-    
-    (menu);
     glutTimerFunc(100, mytimer, 1);
     glutMainLoop();
     return 0;
