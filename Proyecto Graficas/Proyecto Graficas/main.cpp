@@ -35,9 +35,9 @@ bool pause;
 
 //__FILE__ is a preprocessor macro that expands to full path to the current file.
 string fullPath = __FILE__;
-const int TEXTURE_COUNT=3;
+const int TEXTURE_COUNT = 11;
 
-int state=0;
+int state = 0;
 static GLuint texName[TEXTURE_COUNT];
 
 //le borramos el exceso para solo obtener el Path padre
@@ -98,6 +98,29 @@ void initRendering()
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/fondo_Salir.bmp");
     image = loadBMP(ruta);loadTexture(image,i++);
     
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/coke.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/heroine.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/maryjane.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/meth.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+     
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/molly.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/shroom.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/hand.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/juanito.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
     
     delete image;
 }
@@ -241,6 +264,7 @@ void JuanMovement(int tecla, int x, int y)
             }
             glutPostRedisplay();
             break;
+        //Enter button.
         case 13:
             if (state == 0) {
                 state = 3;
@@ -250,12 +274,13 @@ void JuanMovement(int tecla, int x, int y)
                 exit(-1);
             }
             break;
-        //Letter 'p' or 'P'
+        //Letter 'p' or 'P'.
         case 80:
         case 112:
             pause = !pause;
             glutPostRedisplay();
             break;
+        //Esc button.
         case 27:
             exit(-1);
             break;
