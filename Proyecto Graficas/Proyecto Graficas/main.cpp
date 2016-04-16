@@ -197,14 +197,17 @@ void dibuja()
         glEnable(GL_TEXTURE_GEN_S);
         glEnable(GL_TEXTURE_GEN_T);
         
+        glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
+        glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
+        
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 6; j++) {
-                drugs[i][j].draw(texName[i + 3]);
+                drugs[i][j].draw(texName[j + 3]);
             }
         }
         
-        juan.draw(texName[9]);
-        hand.draw(texName[10]);
+        juan.draw(texName[10]);
+        hand.draw(texName[9]);
     }
 
     

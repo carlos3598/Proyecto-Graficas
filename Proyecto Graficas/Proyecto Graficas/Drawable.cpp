@@ -30,11 +30,16 @@ Drawable::Drawable() {
 }
 
 void Drawable::draw(GLuint texName) {
+    GLUquadricObj *qobj;
+
+    glBindTexture(GL_TEXTURE_2D, texName);
     glPushMatrix();
-        glBindTexture(GL_TEXTURE_2D, texName);
+        qobj = gluNewQuadric();
         glTranslated(x, y, 0);
         glScalef(scaleX, scaleY, 0.1);
-        glutSolidCube(1);
+        gluQuadricDrawStyle(qobj, GLU_POINT); /* smooth shaded */
+        gluSphere(qobj, 0.75, 25, 20);
+        glutSolidSphere(1.0,10,10);
     glPopMatrix();
 }
 
