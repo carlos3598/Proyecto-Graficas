@@ -22,11 +22,14 @@ public:
     float getY();
     void setX(float x);
     void setY(float y);
+    void setCrash(bool crash);
+    bool getCrash();
 
 private:
     float x;
     float y;
     int texture;
+    bool crash;
     
 protected:
     float scaleX;

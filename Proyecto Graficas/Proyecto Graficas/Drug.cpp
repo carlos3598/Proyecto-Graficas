@@ -15,5 +15,5 @@ Drug::Drug() {
 }
 
 void Drug::move(int direction){
-    setX(getX() + 0.1 * direction);
+    setX(getX() + 0.05 * direction);
 }

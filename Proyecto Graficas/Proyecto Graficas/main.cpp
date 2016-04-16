@@ -32,6 +32,7 @@ Juan juan;
 Hand hand;
 int direction;
 bool pause;
+bool hasFired = false;
 
 //__FILE__ is a preprocessor macro that expands to full path to the current file.
 string fullPath = __FILE__;
@@ -98,22 +99,22 @@ void initRendering()
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/fondo_Salir.bmp");
     image = loadBMP(ruta);loadTexture(image,i++);
     
-    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/coke.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
-    
-    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/heroine.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
-    
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/maryjane.bmp");
     image = loadBMP(ruta);loadTexture(image,i++);
     
-    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/meth.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
-     
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/molly.bmp");
     image = loadBMP(ruta);loadTexture(image,i++);
     
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/shroom.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/coke.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/meth.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/heroine.bmp");
     image = loadBMP(ruta);loadTexture(image,i++);
     
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/hand.bmp");
@@ -128,7 +129,7 @@ void initRendering()
 
 void init()
 {
-    pause = false;
+    pause = true;
     
     glClearColor(0, 0.19, 0.4, 1);
     // Para que las paredes se vean sólidas (no transparentes)
@@ -262,7 +263,9 @@ void JuanMovement(int tecla, int x, int y)
     switch (tecla) {
         case GLUT_KEY_RIGHT:
             juan.setX(juan.getX() + 0.1);
-            hand.setX(hand.getX() + 0.1);
+            if (!hasFired) {
+                hand.setX(hand.getX() + 0.1);
+            }
             if (juan.getX() > 1.8) {
                 juan.setX(1.8);
                 hand.setX(1.8);
@@ -271,7 +274,9 @@ void JuanMovement(int tecla, int x, int y)
             break;
         case GLUT_KEY_LEFT :
             juan.setX(juan.getX() - 0.1);
-            hand.setX(hand.getX() - 0.1);
+            if (!hasFired) {
+                hand.setX(hand.getX() - 0.1);
+            }
             if (juan.getX() < -1.8) {
                 juan.setX(-1.8);
                 hand.setX(-1.8);
@@ -294,11 +299,17 @@ void JuanMovement(int tecla, int x, int y)
         case 13:
             if (state == 0) {
                 state = 3;
+                pause = false;
                 glutPostRedisplay();
             }
             if (state == 2) {
                 exit(-1);
             }
+            break;
+        //Space Button
+        case 32:
+            hasFired = true;
+            glutPostRedisplay();
             break;
         //Letter 'p' or 'P'.
         case 80:
@@ -319,10 +330,24 @@ void mytimer(int i){
         bool crash = false;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 6; j++) {
+                //Collides with walls.
                 if(drugs[i][j].getX() > 1.8 || drugs[i][j].getX() < -1.8){
                     crash = true;
                     direction *= -1;
                     break;
+                }
+                //Collides with hand in X.
+                if (hand.getX() > drugs[i][j].getX() - 0.25 && hand.getX() <  drugs[i][j].getX() + 0.25 ) {
+                    //Collides with hand in Y.
+                    if (hand.getY() > drugs[i][j].getY() -0.25 && hand.getY() < drugs[i][j].getY() + 0.25) {
+                        if (!drugs[i][j].getCrash()) {
+                            drugs[i][j].setCrash(true);
+                            hasFired = false;
+                            hand.setY(-1.5);
+                            hand.setX(juan.getX());
+                            cout << i << " " << j << endl;
+                        }
+                    }
                 }
             }
         }
@@ -331,7 +356,17 @@ void mytimer(int i){
                 drugs[i][j].move(direction);
             }
         }
+        
+        if (hasFired) {
+            hand.setY(hand.getY() + 0.1);
+        }
+        if (hand.getY() > 2.5) {
+            hasFired = false;
+            hand.setY(-1.5);
+            hand.setX(juan.getX());
+        }
     }
+    
     glutTimerFunc(100, mytimer, 1);
     glutPostRedisplay();
 }

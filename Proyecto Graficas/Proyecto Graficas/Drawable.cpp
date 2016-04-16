@@ -27,20 +27,25 @@ Drawable::Drawable() {
     texture = -1;
     scaleX = 1.0;
     scaleY = 1.0;
+    crash = false;
 }
 
 void Drawable::draw(GLuint texName) {
-    GLUquadricObj *qobj;
-
-    glBindTexture(GL_TEXTURE_2D, texName);
-    glPushMatrix();
+    if (!crash) {
+        GLUquadricObj *qobj;
+        glBindTexture(GL_TEXTURE_2D, texName);
+        glPushMatrix();
         qobj = gluNewQuadric();
         glTranslated(x, y, 0);
         glScalef(scaleX, scaleY, 0.1);
         gluQuadricDrawStyle(qobj, GLU_POINT); /* smooth shaded */
         gluSphere(qobj, 0.75, 25, 20);
         glutSolidSphere(1.0,10,10);
-    glPopMatrix();
+        glPopMatrix();
+    }
+}
+bool Drawable::getCrash(){
+    return crash;
 }
 
 float Drawable::getX() {
@@ -50,11 +55,12 @@ float Drawable::getX() {
 float Drawable::getY() {
     return y;
 }
-
+void Drawable::setCrash(bool crash){
+    this->crash = crash;
+}
 void Drawable::setX(float x) {
     this -> x = x;
 }
-
 void Drawable::setY(float y) {
     this -> y = y;
 }
