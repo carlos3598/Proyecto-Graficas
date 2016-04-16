@@ -31,6 +31,7 @@ Drug drugs[10][6];
 Juan juan;
 Hand hand;
 int direction;
+bool pause;
 
 //__FILE__ is a preprocessor macro that expands to full path to the current file.
 string fullPath = __FILE__;
@@ -104,6 +105,8 @@ void initRendering()
 
 void init()
 {
+    pause = false;
+    
     glClearColor(0, 0.19, 0.4, 1);
     // Para que las paredes se vean sólidas (no transparentes)
     glEnable(GL_DEPTH_TEST);
@@ -197,29 +200,6 @@ void reshape(int ancho, int alto)
     gluLookAt(0, 0, 1.1, 0, 0, 0, 0, 1, 0);
 }
 
-void menu(unsigned char theKey, int mouseX, int mouseY)
-{
-    switch (theKey)
-    {
-        case 'p':
-        case 'P':
-            break;
-        case 'b':
-        case 'B':
-            break;
-        case 'D':
-        case 'd':
-            break;
-        case 'E':
-        case 'e':
-            exit(-1);
-            //terminate the program
-            break;
-        default:
-            break;		      // do nothing
-    }
-}
-
 void changeState(int change){
     if (change > 0) {
         state++;
@@ -270,6 +250,12 @@ void JuanMovement(int tecla, int x, int y)
                 exit(-1);
             }
             break;
+        //Letter 'p' or 'P'
+        case 80:
+        case 112:
+            pause = !pause;
+            glutPostRedisplay();
+            break;
         case 27:
             exit(-1);
             break;
@@ -278,19 +264,21 @@ void JuanMovement(int tecla, int x, int y)
 }
 
 void mytimer(int i){
-    bool crash = false;
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 6; j++) {
-            if(drugs[i][j].getX() > 2 || drugs[i][j].getX() < -2){
-                crash = true;
-                direction *= -1;
-                break;
+    if (!pause) {
+        bool crash = false;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 6; j++) {
+                if(drugs[i][j].getX() > 2 || drugs[i][j].getX() < -2){
+                    crash = true;
+                    direction *= -1;
+                    break;
+                }
             }
         }
-    }
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 6; j++) {
-            drugs[i][j].move(direction);
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 6; j++) {
+                drugs[i][j].move(direction);
+            }
         }
     }
     glutTimerFunc(100, mytimer, 1);
