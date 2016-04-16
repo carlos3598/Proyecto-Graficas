@@ -9,6 +9,6 @@
 #include "Juan.h"
 
 Juan::Juan() {
-    scaleX = 0.4;
-    scaleY = 0.4;
+    scaleX = 0.2;
+    scaleY = 0.2;
 }

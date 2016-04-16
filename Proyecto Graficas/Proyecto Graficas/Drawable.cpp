@@ -25,8 +25,8 @@ Drawable::Drawable() {
     x = 0;
     y = 0;
     texture = -1;
-    scaleX = 1;
-    scaleY = 1;
+    scaleX = 1.0;
+    scaleY = 1.0;
 }
 
 void Drawable::draw(GLuint texName) {

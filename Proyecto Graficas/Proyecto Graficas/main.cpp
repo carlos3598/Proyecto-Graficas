@@ -149,8 +149,8 @@ void init()
     
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 6; j++) {
-            drugs[i][j].setX(i * 0.25 - 1.15);
-            drugs[i][j].setY(j * 0.25 + 0.5);
+            drugs[i][j].setX(i * 0.28 - 1.15);
+            drugs[i][j].setY(j * 0.35);
         }
     }
     
@@ -193,6 +193,10 @@ void dibuja()
         glVertex3f(-2.0f, 2.0f, 0);
         glEnd();
     }else{
+        glClearColor(1.0,1.0,1.0,1.0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_TEXTURE_GEN_S);
         glEnable(GL_TEXTURE_GEN_T);
@@ -208,8 +212,15 @@ void dibuja()
         
         juan.draw(texName[10]);
         hand.draw(texName[9]);
-    }
+        glDisable(GL_TEXTURE_2D);
+        
+        glPushMatrix();
+        glColor3ub(36, 36, 36);
+        glutSolidCube(4);
+        glPopMatrix();
+        glColor3ub(255, 255, 255);
 
+    }
     
     glutSwapBuffers();
 }
@@ -252,11 +263,19 @@ void JuanMovement(int tecla, int x, int y)
         case GLUT_KEY_RIGHT:
             juan.setX(juan.getX() + 0.1);
             hand.setX(hand.getX() + 0.1);
+            if (juan.getX() > 1.8) {
+                juan.setX(1.8);
+                hand.setX(1.8);
+            }
             glutPostRedisplay();
             break;
         case GLUT_KEY_LEFT :
             juan.setX(juan.getX() - 0.1);
             hand.setX(hand.getX() - 0.1);
+            if (juan.getX() < -1.8) {
+                juan.setX(-1.8);
+                hand.setX(-1.8);
+            }
             glutPostRedisplay();
             break;
         case GLUT_KEY_UP:
@@ -300,7 +319,7 @@ void mytimer(int i){
         bool crash = false;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 6; j++) {
-                if(drugs[i][j].getX() > 2 || drugs[i][j].getX() < -2){
+                if(drugs[i][j].getX() > 1.8 || drugs[i][j].getX() < -1.8){
                     crash = true;
                     direction *= -1;
                     break;

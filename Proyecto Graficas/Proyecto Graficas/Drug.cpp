@@ -9,8 +9,8 @@
 #include "Drug.h"
 
 Drug::Drug() {
-    scaleX = 0.2;
-    scaleY = 0.2;
+    scaleX = 0.15;
+    scaleY = 0.15;
     
 }
 
