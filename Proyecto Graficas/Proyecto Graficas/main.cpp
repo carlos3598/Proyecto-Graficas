@@ -193,14 +193,18 @@ void dibuja()
         glVertex3f(-2.0f, 2.0f, 0);
         glEnd();
     }else{
+        glEnable(GL_TEXTURE_2D);
+        glEnable(GL_TEXTURE_GEN_S);
+        glEnable(GL_TEXTURE_GEN_T);
+        
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 6; j++) {
-                drugs[i][j].draw();
+                drugs[i][j].draw(texName[i + 3]);
             }
         }
         
-        juan.draw();
-        hand.draw();
+        juan.draw(texName[9]);
+        hand.draw(texName[10]);
     }
 
     

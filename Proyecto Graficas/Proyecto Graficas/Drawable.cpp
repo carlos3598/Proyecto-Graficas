@@ -7,6 +7,18 @@
 //
 
 #include "Drawable.h"
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
+#include <GL/glut.h>
+#endif
+#include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
+#include "imageloader.h"
+#include "Drug.h"
+#include "Juan.h"
+#include "Hand.h"
 
 Drawable::Drawable() {
     
@@ -17,8 +29,9 @@ Drawable::Drawable() {
     scaleY = 1;
 }
 
-void Drawable::draw() {
+void Drawable::draw(GLuint texName) {
     glPushMatrix();
+        glBindTexture(GL_TEXTURE_2D, texName);
         glTranslated(x, y, 0);
         glScalef(scaleX, scaleY, 0.1);
         glutSolidCube(1);

@@ -16,7 +16,7 @@
 class Drawable {
     
 public:
-    void draw();
+    void draw(GLuint texName);
     Drawable();
     float getX();
     float getY();
