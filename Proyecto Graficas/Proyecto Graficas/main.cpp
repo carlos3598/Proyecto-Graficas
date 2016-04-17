@@ -33,10 +33,11 @@ Hand hand;
 int direction;
 bool pause;
 bool hasFired = false;
+int score = 0;
 
 //__FILE__ is a preprocessor macro that expands to full path to the current file.
 string fullPath = __FILE__;
-const int TEXTURE_COUNT = 11;
+const int TEXTURE_COUNT = 15; //15
 
 int state = 0;
 static GLuint texName[TEXTURE_COUNT];
@@ -90,6 +91,13 @@ void initRendering()
     
     
     char  ruta[200];
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/welcome.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/historia.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/fondo_Inicio.bmp");
     image = loadBMP(ruta);loadTexture(image,i++);
     
@@ -97,6 +105,12 @@ void initRendering()
     image = loadBMP(ruta);loadTexture(image,i++);
     
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/fondo_Salir.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/instrucciones_regresar.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/instrucciones_iniciar.bmp");
     image = loadBMP(ruta);loadTexture(image,i++);
     
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/maryjane.bmp");
@@ -159,7 +173,7 @@ void init()
     juan.setY(-1.7);
     
     hand.setX(0);
-    hand.setY(-1.5);
+    hand.setY(-1.7);
     
     direction = 1;
     
@@ -171,7 +185,7 @@ void dibuja()
     glClearColor(1.0,1.0,1.0,1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    if (state < 3) {
+    if (state < 7) {
         
         //Habilitar el uso de texturas
         glEnable(GL_TEXTURE_2D);
@@ -207,12 +221,13 @@ void dibuja()
         
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 6; j++) {
-                drugs[i][j].draw(texName[j + 3]);
+                drugs[i][j].draw(texName[j + 7]);
             }
         }
         
-        juan.draw(texName[10]);
-        hand.draw(texName[9]);
+        hand.draw(texName[13]);
+        juan.draw(texName[14]);
+
         glDisable(GL_TEXTURE_2D);
         
         glPushMatrix();
@@ -249,12 +264,12 @@ void changeState(int change){
         state--;
     }
     
-    if (state >2) {
-        state = 2;
+    if (state >4) {
+        state = 4;
     }
     
-    if (state < 0) {
-        state = 0;
+    if (state < 2) {
+        state = 2;
     }
 }
 
@@ -262,6 +277,9 @@ void JuanMovement(int tecla, int x, int y)
 {
     switch (tecla) {
         case GLUT_KEY_RIGHT:
+            if (state == 5) {
+                state = 6;
+            }
             juan.setX(juan.getX() + 0.1);
             if (!hasFired) {
                 hand.setX(hand.getX() + 0.1);
@@ -273,6 +291,9 @@ void JuanMovement(int tecla, int x, int y)
             glutPostRedisplay();
             break;
         case GLUT_KEY_LEFT :
+            if (state == 6) {
+                state = 5;
+            }
             juan.setX(juan.getX() - 0.1);
             if (!hasFired) {
                 hand.setX(hand.getX() - 0.1);
@@ -284,27 +305,37 @@ void JuanMovement(int tecla, int x, int y)
             glutPostRedisplay();
             break;
         case GLUT_KEY_UP:
-            if (state != 3) {
+            if (state != 7) {
                 changeState(-1);
             }
             glutPostRedisplay();
             break;
         case GLUT_KEY_DOWN:
-            if (state != 3) {
+            if (state != 7) {
                 changeState(+1);
             }
             glutPostRedisplay();
             break;
         //Enter button.
         case 13:
-            if (state == 0) {
-                state = 3;
-                pause = false;
-                glutPostRedisplay();
-            }
             if (state == 2) {
+                state = 7;
+                pause = false;
+            }
+            else if (state == 3) {
+                state = 5;
+            }
+            else if (state == 5) {
+                state = 2;
+            }
+            else if (state == 4) {
                 exit(-1);
             }
+            else if (state == 6){
+                state = 7;
+                pause = false;
+            }
+            glutPostRedisplay();
             break;
         //Space Button
         case 32:
@@ -343,9 +374,11 @@ void mytimer(int i){
                         if (!drugs[i][j].getCrash()) {
                             drugs[i][j].setCrash(true);
                             hasFired = false;
-                            hand.setY(-1.5);
+                            hand.setY(-1.7);
                             hand.setX(juan.getX());
-                            cout << i << " " << j << endl;
+                            
+                            score += (j + 1) * 10;
+                            cout << i << " " << j << " " << score << endl;
                         }
                     }
                 }
@@ -362,13 +395,26 @@ void mytimer(int i){
         }
         if (hand.getY() > 2.5) {
             hasFired = false;
-            hand.setY(-1.5);
+            hand.setY(-1.7);
             hand.setX(juan.getX());
         }
     }
     
     glutTimerFunc(100, mytimer, 1);
     glutPostRedisplay();
+}
+
+void history(int i){
+    state = 2;
+    glutTimerFunc(100, mytimer, 1);
+    glutPostRedisplay();
+}
+
+void welcome(int i){
+    state = 1;
+    glutTimerFunc(100, history, 1);
+    glutPostRedisplay();
+
 }
 
 int main(int argc, char *argv[])
@@ -384,7 +430,7 @@ int main(int argc, char *argv[])
     glutDisplayFunc(dibuja);
     glutReshapeFunc(reshape);
     glutSpecialFunc(JuanMovement);
-    glutTimerFunc(100, mytimer, 1);
+    glutTimerFunc(100, welcome, 1);
     glutMainLoop();
     return 0;
 }
