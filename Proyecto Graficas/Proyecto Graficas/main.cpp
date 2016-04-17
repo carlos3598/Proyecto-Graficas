@@ -9,7 +9,6 @@
 //
 
 
-
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
@@ -22,7 +21,14 @@
 #include "Drug.h"
 #include "Juan.h"
 #include "Hand.h"
+#include <SDL2/SDL.h>                   // SDL library
+#include <SDL2/SDL_mixer.h>             // SDL sound library
+
 using namespace std;
+
+//Sonidos
+Mix_Chunk *background;
+Mix_Chunk *collision;
 
 //Apuntadores a las lista
 
@@ -176,6 +182,14 @@ void init()
     hand.setY(-1.7);
     
     direction = 1;
+    
+    SDL_Init(SDL_INIT_EVERYTHING);
+    
+    // Initialize SDL_Mixer
+    Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
+    
+    background = Mix_LoadWAV("/Users/Balbina/Documents/10mo semestre/Graficas computacionales/final/Proyecto-Graficas/Proyecto Graficas/Proyecto Graficas/sounds/DigitalStream.wav");
+    collision = Mix_LoadWAV("/Users/Balbina/Documents/10mo semestre/Graficas computacionales/final/Proyecto-Graficas/Proyecto Graficas/Proyecto Graficas/sounds/Explosion.wav");
     
 }
 

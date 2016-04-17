@@ -11,6 +11,7 @@
 		37EAC3DE1C9A0A9500F20112 /* Drug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37EAC3DC1C9A0A9500F20112 /* Drug.cpp */; };
 		37EAC3E11C9A0F8500F20112 /* Juan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37EAC3DF1C9A0F8500F20112 /* Juan.cpp */; };
 		37EAC3E41C9A10D400F20112 /* Hand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37EAC3E21C9A10D400F20112 /* Hand.cpp */; };
+		37F9A0A31CC3222700FBF6E6 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F9A0A21CC3222700FBF6E6 /* SDL2.framework */; };
 		FD65A4441C9936F7005CF9C1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD65A4431C9936F7005CF9C1 /* main.cpp */; };
 		FD65A44B1C99371B005CF9C1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD65A44A1C99371B005CF9C1 /* OpenGL.framework */; };
 		FD65A44D1C99371F005CF9C1 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD65A44C1C99371F005CF9C1 /* GLUT.framework */; };
@@ -37,6 +38,9 @@
 		37EAC3E01C9A0F8500F20112 /* Juan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Juan.h; sourceTree = "<group>"; };
 		37EAC3E21C9A10D400F20112 /* Hand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hand.cpp; sourceTree = "<group>"; };
 		37EAC3E31C9A10D400F20112 /* Hand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hand.h; sourceTree = "<group>"; };
+		37F372F21CC3242800AA9148 /* DigitalStream.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DigitalStream.wav; sourceTree = "<group>"; };
+		37F372F31CC324F700AA9148 /* Explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Explosion.wav; sourceTree = "<group>"; };
+		37F9A0A21CC3222700FBF6E6 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		FD2D33451CB4C8390060366D /* imageloader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imageloader.h; sourceTree = "<group>"; };
 		FD2D33461CB4C85C0060366D /* Texturas */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Texturas; sourceTree = "<group>"; };
 		FD65A4401C9936F7005CF9C1 /* Proyecto Graficas */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Proyecto Graficas"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37F9A0A31CC3222700FBF6E6 /* SDL2.framework in Frameworks */,
 				FD65A44D1C99371F005CF9C1 /* GLUT.framework in Frameworks */,
 				FD65A44B1C99371B005CF9C1 /* OpenGL.framework in Frameworks */,
 			);
@@ -58,6 +63,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37F372F11CC3242800AA9148 /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				37F372F31CC324F700AA9148 /* Explosion.wav */,
+				37F372F21CC3242800AA9148 /* DigitalStream.wav */,
+			);
+			path = sounds;
+			sourceTree = "<group>";
+		};
 		FD2D33441CB4C8250060366D /* Clases */ = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +90,7 @@
 		FD65A4371C9936F7005CF9C1 = {
 			isa = PBXGroup;
 			children = (
+				37F9A0A21CC3222700FBF6E6 /* SDL2.framework */,
 				FD2D33451CB4C8390060366D /* imageloader.h */,
 				FD65A44C1C99371F005CF9C1 /* GLUT.framework */,
 				FD65A44A1C99371B005CF9C1 /* OpenGL.framework */,
@@ -95,6 +110,7 @@
 		FD65A4421C9936F7005CF9C1 /* Proyecto Graficas */ = {
 			isa = PBXGroup;
 			children = (
+				37F372F11CC3242800AA9148 /* sounds */,
 				FD2D33461CB4C85C0060366D /* Texturas */,
 				FD65A4431C9936F7005CF9C1 /* main.cpp */,
 				FD2D33441CB4C8250060366D /* Clases */,
@@ -251,6 +267,10 @@
 		FD65A4481C9936F7005CF9C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -258,6 +278,10 @@
 		FD65A4491C9936F7005CF9C1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
