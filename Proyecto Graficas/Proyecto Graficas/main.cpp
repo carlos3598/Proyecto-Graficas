@@ -22,6 +22,7 @@
 #include "Drug.h"
 #include "Juan.h"
 #include "Hand.h"
+#include "Sound.h"
 using namespace std;
 
 //Apuntadores a las lista
@@ -34,6 +35,19 @@ int direction;
 bool pause;
 bool hasFired = false;
 int score = 0;
+
+Sound sonido = Sound("/Users/Balbina/Documents/10mo semestre/Graficas computacionales/final/Proyecto-Graficas/Proyecto Graficas/Proyecto Graficas/Explosion.wav");
+Sound sonido2 = Sound("/Users/Balbina/Documents/10mo semestre/Graficas computacionales/final/Proyecto-Graficas/Proyecto Graficas/Proyecto Graficas/Explosion.wav");
+
+void sound (int value){
+    sonido.PlaySound();
+    glutTimerFunc(4000,sound,0);
+    
+}
+
+void sound2 (int value){
+    sonido2.PlaySound();
+}
 
 //__FILE__ is a preprocessor macro that expands to full path to the current file.
 string fullPath = __FILE__;
@@ -378,7 +392,7 @@ void mytimer(int i){
                             hand.setX(juan.getX());
                             
                             score += (j + 1) * 10;
-                            cout << i << " " << j << " " << score << endl;
+                            glutTimerFunc(0, sound2, 3);
                         }
                     }
                 }
@@ -399,7 +413,6 @@ void mytimer(int i){
             hand.setX(juan.getX());
         }
     }
-    
     glutTimerFunc(100, mytimer, 1);
     glutPostRedisplay();
 }
@@ -431,6 +444,7 @@ int main(int argc, char *argv[])
     glutReshapeFunc(reshape);
     glutSpecialFunc(JuanMovement);
     glutTimerFunc(100, welcome, 1);
+    glutTimerFunc(0, sound, 0);
     glutMainLoop();
     return 0;
 }
