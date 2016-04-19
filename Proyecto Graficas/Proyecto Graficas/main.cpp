@@ -34,6 +34,8 @@ int direction;
 bool pause;
 bool hasFired = false;
 int score = 0;
+double posBackground = 0.1;
+double posCharacterY = -1.4;
 
 //__FILE__ is a preprocessor macro that expands to full path to the current file.
 string fullPath = __FILE__;
@@ -162,6 +164,7 @@ void init()
     //cambiar el modo de mezcla
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
+ 
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 6; j++) {
             drugs[i][j].setX(i * 0.28 - 1.15);
@@ -169,11 +172,12 @@ void init()
         }
     }
     
+    
     juan.setX(0);
-    juan.setY(-1.7);
+    juan.setY(posCharacterY);
     
     hand.setX(0);
-    hand.setY(-1.7);
+    hand.setY(posCharacterY);
     
     direction = 1;
     
@@ -184,6 +188,7 @@ void dibuja()
 {
     glClearColor(1.0,1.0,1.0,1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
     
     if (state < 7) {
         
@@ -213,28 +218,41 @@ void dibuja()
 
         
         glEnable(GL_TEXTURE_2D);
-        glEnable(GL_TEXTURE_GEN_S);
-        glEnable(GL_TEXTURE_GEN_T);
         
-        glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
-        glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
-        
+        glPushMatrix();
+        glRotated(-10, 1, 0, 0);
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 6; j++) {
                 drugs[i][j].draw(texName[j + 7]);
             }
         }
         
+        //Cube Lines
+        glPushMatrix();
+        glColor3ub(0, 100, 36);
+        glTranslated(posBackground, 1, 0);
+        glScaled(3, 2.3, 0.15);
+        glutWireCube(1);
+        //glColor3ub(255, 255, 255);
+        glPopMatrix();
+        
+        glPopMatrix();
+        
+        glPushMatrix();
+        glRotated(-5, 1, 0, 0);
         hand.draw(texName[13]);
         juan.draw(texName[14]);
+        glPopMatrix();
 
         glDisable(GL_TEXTURE_2D);
         
+        //Background
         glPushMatrix();
         glColor3ub(36, 36, 36);
         glutSolidCube(4);
         glPopMatrix();
         glColor3ub(255, 255, 255);
+    
 
     }
     
@@ -243,18 +261,32 @@ void dibuja()
 
 void reshape(int ancho, int alto)
 {
-    
-    // Ventana
-    glViewport(0, 0, ancho, alto);
-    // Sistema de coordenadas
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(-2, 2, -2, 2,1,12 ); //izq, der, abajo, arriba, cerca, lejos
-    //glFrustum(-2, 2, -2, 2, 1, 12);
-    
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    gluLookAt(0, 0, 1.1, 0, 0, 0, 0, 1, 0);
+    if (state < 7) {
+        // Ventana
+        glViewport(0, 0, ancho, alto);
+        // Sistema de coordenadas
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(-2, 2, -2, 2,1,12 ); //izq, der, abajo, arriba, cerca, lejos
+        //glFrustum(-1.5, 1.5, -1.5, 1.5, 1, 12);
+        
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+        gluLookAt(0, 0, 1.5, 0, 0, 0, 0, 1, 0);
+    }
+    else{
+        // Ventana
+        glViewport(0, 0, ancho, alto);
+        // Sistema de coordenadas
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        //glOrtho(-2, 2, -2, 2,1,12 ); //izq, der, abajo, arriba, cerca, lejos
+        glFrustum(-1.5, 1.5, -1.5, 1.5, 1, 12);
+        
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+        gluLookAt(0, 0, 1.25, 0, 0, 0, 0, 1, 0);
+    }
 }
 
 void changeState(int change){
@@ -320,6 +352,7 @@ void JuanMovement(int tecla, int x, int y)
         case 13:
             if (state == 2) {
                 state = 7;
+                reshape(640, 480);
                 pause = false;
             }
             else if (state == 3) {
@@ -374,11 +407,10 @@ void mytimer(int i){
                         if (!drugs[i][j].getCrash()) {
                             drugs[i][j].setCrash(true);
                             hasFired = false;
-                            hand.setY(-1.7);
+                            hand.setY(posCharacterY);
                             hand.setX(juan.getX());
                             
                             score += (j + 1) * 10;
-                            cout << i << " " << j << " " << score << endl;
                         }
                     }
                 }
@@ -389,13 +421,14 @@ void mytimer(int i){
                 drugs[i][j].move(direction);
             }
         }
+        posBackground += 0.05 * direction;
         
         if (hasFired) {
             hand.setY(hand.getY() + 0.1);
         }
         if (hand.getY() > 2.5) {
             hasFired = false;
-            hand.setY(-1.7);
+            hand.setY(posCharacterY);
             hand.setX(juan.getX());
         }
     }
@@ -406,13 +439,13 @@ void mytimer(int i){
 
 void history(int i){
     state = 2;
-    glutTimerFunc(100, mytimer, 1);
+    glutTimerFunc(1000, mytimer, 1);
     glutPostRedisplay();
 }
 
 void welcome(int i){
     state = 1;
-    glutTimerFunc(100, history, 1);
+    glutTimerFunc(1000, history, 1);
     glutPostRedisplay();
 
 }
@@ -430,7 +463,7 @@ int main(int argc, char *argv[])
     glutDisplayFunc(dibuja);
     glutReshapeFunc(reshape);
     glutSpecialFunc(JuanMovement);
-    glutTimerFunc(100, welcome, 1);
+    glutTimerFunc(1000, welcome, 1);
     glutMainLoop();
     return 0;
 }
