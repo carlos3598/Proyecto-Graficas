@@ -232,7 +232,7 @@ void init()
     
 }
 
-//It Draws all the figures and textures.
+//It Draws all the figures and textu                                     res.
 void dibuja()
 {
     glClearColor(1.0,1.0,1.0,1.0);
