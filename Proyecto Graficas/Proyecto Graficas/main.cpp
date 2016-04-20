@@ -33,15 +33,15 @@ Hand hand;
 int direction;
 bool pause;
 bool hasFired = false;
-int score = 0;
-double posBackground = 0.1;
-double posCharacterY = -1.4;
+int score;
+double posBackground;
+double posCharacterY;
 
 //__FILE__ is a preprocessor macro that expands to full path to the current file.
 string fullPath = __FILE__;
 const int TEXTURE_COUNT = 15; //15
 
-int state = 0;
+int state;
 static GLuint texName[TEXTURE_COUNT];
 
 //le borramos el exceso para solo obtener el Path padre
@@ -146,6 +146,9 @@ void initRendering()
 void init()
 {
     pause = true;
+    score = 0;
+    posBackground = 0.1;
+    posCharacterY = -1.4;
     
     glClearColor(0, 0.19, 0.4, 1);
     // Para que las paredes se vean sólidas (no transparentes)
@@ -167,15 +170,18 @@ void init()
  
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 6; j++) {
+            drugs[i][j] = Drug();
             drugs[i][j].setX(i * 0.28 - 1.15);
             drugs[i][j].setY(j * 0.35);
         }
     }
     
     
+    juan = Juan();
     juan.setX(0);
     juan.setY(posCharacterY);
     
+    hand = Hand();
     hand.setX(0);
     hand.setY(posCharacterY);
     
@@ -380,6 +386,13 @@ void JuanMovement(int tecla, int x, int y)
         case 112:
             pause = !pause;
             glutPostRedisplay();
+            break;
+        //Letter 'r' or 'R'.
+        case 82:
+        case 114:
+            init();
+            glutPostRedisplay();
+            pause = false;
             break;
         //Esc button.
         case 27:
