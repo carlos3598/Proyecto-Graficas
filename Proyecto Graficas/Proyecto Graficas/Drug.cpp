@@ -11,6 +11,7 @@
 Drug::Drug() {
     scaleX = 0.15;
     scaleY = 0.15;
+    scaleZ = 0.1;
     
 }
 

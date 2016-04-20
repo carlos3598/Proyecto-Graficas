@@ -11,4 +11,5 @@
 Juan::Juan() {
     scaleX = 0.2;
     scaleY = 0.2;
+    scaleZ = 0.1;
 }

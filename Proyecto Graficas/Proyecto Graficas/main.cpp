@@ -25,15 +25,10 @@
 #include "Juan.h"
 #include "Hand.h"
 #include "Sound.h"
+
 using namespace std;
 
-Sound sonido = Sound("/Users/Balbina/Documents/10mo semestre/Graficas computacionales/final/Proyecto-Graficas/Proyecto Graficas/Proyecto Graficas/DigitalStream.wav");
 
-void sound (int value){
-    sonido.PlaySound();
-    glutTimerFunc(4000,sound,0);
-    
-}
 
 //Apuntadores a las lista
 
@@ -48,6 +43,8 @@ int score;
 double posBackground;
 double posCharacterY;
 bool gameover = false;
+int width = 640;
+int height = 480;
 
 //__FILE__ is a preprocessor macro that expands to full path to the current file.
 string fullPath = __FILE__;
@@ -55,6 +52,16 @@ const int TEXTURE_COUNT = 17; //17
 
 int state;
 static GLuint texName[TEXTURE_COUNT];
+
+Sound sonido = Sound("/Users/carlossalazar/Dropbox/ITC/10mo semestre/Graficas/Proyecto/Proyecto Graficas/Proyecto Graficas/DigitalStream.wav");
+
+void sound (int value){
+    if (!pause) {
+        sonido.PlaySound();
+    }
+    glutTimerFunc(4000,sound,0);
+    
+}
 
 //le borramos el exceso para solo obtener el Path padre
 void getParentPath()
@@ -178,7 +185,7 @@ void initRendering()
     delete image;
 }
 
-
+//Initialize all the paramenters.
 void init()
 {
     pause = true;
@@ -226,12 +233,13 @@ void init()
     
 }
 
-
+//It Draws all the figures and textures.
 void dibuja()
 {
     glClearColor(1.0,1.0,1.0,1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
+    //Menu State
     if (state < 7) {
         
         //Habilitar el uso de texturas
@@ -255,7 +263,9 @@ void dibuja()
         glVertex3f(-2.0f, 2.0f, 0);
         glEnd();
         
-    }else if (state == 7){
+    }
+    //Game State
+    else if (state == 7){
         
         glClearColor(1.0,1.0,1.0,1.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -301,6 +311,7 @@ void dibuja()
         drawText(-2, -1, "Puntaje:", GLUT_BITMAP_HELVETICA_18, 255, 255, 255);
 
     }
+    //Gameove State
     else if (state == 8 || state == 9) {
         
         glClearColor(1.0,1.0,1.0,1.0);
@@ -330,7 +341,6 @@ void dibuja()
         glEnd();
         
         glDisable(GL_TEXTURE_2D);
-        
         
         //Background
         glColor3ub(255, 255, 255);
@@ -447,8 +457,9 @@ void JuanMovement(int tecla, int x, int y)
         //Enter button.
         case 13:
             if (state == 2) {
+                glutTimerFunc(0,sound,0);
                 state = 7;
-                reshape(640, 480);
+                reshape(width, height);
                 pause = false;
             }
             else if (state == 3) {
@@ -461,8 +472,9 @@ void JuanMovement(int tecla, int x, int y)
                 exit(-1);
             }
             else if (state == 6){
+                glutTimerFunc(0,sound,0);
                 state = 7;
-                reshape(640, 480);
+                reshape(width, height);
                 pause = false;
             }
             else if (state == 8) {
@@ -470,7 +482,7 @@ void JuanMovement(int tecla, int x, int y)
                 glutPostRedisplay();
                 pause = false;
                 state = 7;
-                reshape(640, 480);
+                reshape(width, height);
             }
             else if (state == 9) {
                 exit(-1);
@@ -532,10 +544,10 @@ void mytimer(int i){
         }
         
         if (!gameover) {
-            if (score >= 20){
+            if (score == 2100){
                 gameover = true;
                 state = 8;
-                reshape(640, 480);
+                reshape(width, height);
             }
         }
         for (int i = 0; i < 10; i++) {
@@ -561,13 +573,13 @@ void mytimer(int i){
 
 void history(int i){
     state = 2;
-    glutTimerFunc(1000, mytimer, 1);
+    glutTimerFunc(100, mytimer, 1);
     glutPostRedisplay();
 }
 
 void welcome(int i){
     state = 1;
-    glutTimerFunc(1000, history, 1);
+    glutTimerFunc(10000, history, 1);
     glutPostRedisplay();
 
 }
@@ -575,7 +587,7 @@ void welcome(int i){
 int main(int argc, char *argv[])
 {
     glutInit(&argc, argv);
-    glutInitWindowSize(640,480);
+    glutInitWindowSize(width,height);
     glutInitWindowPosition(10,10);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH| GLUT_DOUBLE );
     getParentPath();
@@ -585,8 +597,7 @@ int main(int argc, char *argv[])
     glutDisplayFunc(dibuja);
     glutReshapeFunc(reshape);
     glutSpecialFunc(JuanMovement);
-    glutTimerFunc(1000, welcome, 1);
-    glutTimerFunc(0,sound,0);
+    glutTimerFunc(5000, welcome, 1);
     glutMainLoop();
     return 0;
 }

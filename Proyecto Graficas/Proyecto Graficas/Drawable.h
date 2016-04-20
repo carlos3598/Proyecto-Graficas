@@ -34,5 +34,6 @@ private:
 protected:
     float scaleX;
     float scaleY;
+    float scaleZ;
     
 };

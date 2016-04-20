@@ -38,7 +38,7 @@ void Drawable::draw(GLuint texName) {
         
         
         glTranslated(x, y, 0);
-        glScalef(scaleX, scaleY, 0.1);
+        glScalef(scaleX, scaleY, scaleZ);
 //        GLUquadricObj *qobj;
 //        qobj = gluNewQuadric();
 //        gluQuadricDrawStyle(qobj, GLU_FILL); /* smooth shaded */

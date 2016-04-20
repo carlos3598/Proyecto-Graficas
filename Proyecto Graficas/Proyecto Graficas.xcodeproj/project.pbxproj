@@ -125,6 +125,7 @@
 				FD65A43C1C9936F7005CF9C1 /* Sources */,
 				FD65A43D1C9936F7005CF9C1 /* Frameworks */,
 				FD65A43E1C9936F7005CF9C1 /* CopyFiles */,
+				FDF99C871CC7D5B7006FECA9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -165,6 +166,22 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		FDF99C871CC7D5B7006FECA9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "install_name_tool -change /usr/local/lib/libirrklang.dylib @executable_path/libirrklang.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FD65A43C1C9936F7005CF9C1 /* Sources */ = {
@@ -265,6 +282,10 @@
 		FD65A4481C9936F7005CF9C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -272,6 +293,10 @@
 		FD65A4491C9936F7005CF9C1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
