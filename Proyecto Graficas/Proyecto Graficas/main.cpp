@@ -152,6 +152,7 @@ void initRendering()
 void init()
 {
     pause = true;
+    bool success = true;
     
     glClearColor(0, 0.19, 0.4, 1);
     // Para que las paredes se vean sólidas (no transparentes)
@@ -189,11 +190,58 @@ void init()
     
     
     // Initialize SDL_Mixer
-    Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
+//    Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
     
-    background = Mix_LoadMUS("/Users/Balbina/Documents/10mo semestre/Graficas computacionales/final/Proyecto-Graficas/Proyecto Graficas/Proyecto Graficas/sounds/DigitalStream.wav");
-    collision = Mix_LoadWAV("/Users/Balbina/Documents/10mo semestre/Graficas computacionales/final/Proyecto-Graficas/Proyecto Graficas/Proyecto Graficas/sounds/Explosion.wav");
+    //Initialize SDL_mixer
+    if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+    {
+        printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+        success = false;
+    }
     
+//    
+//    background = Mix_LoadMUS("/Users/Balbina/Documents/10mo semestre/Graficas computacionales/final/Proyecto-Graficas/Proyecto Graficas/Proyecto Graficas/sounds/DigitalStream.wav");
+//    collision = Mix_LoadWAV("/Users/Balbina/Documents/10mo semestre/Graficas computacionales/final/Proyecto-Graficas/Proyecto Graficas/Proyecto Graficas/sounds/Explosion.wav");
+    
+}
+
+bool loadMedia()
+{
+    //Loading success flag
+    bool success = true;
+    
+    //Load music
+    background = Mix_LoadMUS( "sounds/DigitalStream.wav" );
+    if( background == NULL )
+    {
+        printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+        success = false;
+    }
+    
+    //Load sound effects
+    collision = Mix_LoadWAV( "sounds/Explosion.wav" );
+    if( collision == NULL )
+    {
+        printf( "Failed to load collision sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+        success = false;
+    }
+    
+    return success;
+}
+
+void close()
+{
+    //Free the sound effects
+    Mix_FreeChunk( collision );
+    collision = NULL;
+    
+    //Free the music
+    Mix_FreeMusic( background );
+    background = NULL;
+    
+    //Quit SDL subsystems
+    Mix_Quit();
+    SDL_Quit();
 }
 
 
@@ -358,6 +406,7 @@ void JuanMovement(int tecla, int x, int y)
         case 32:
             hasFired = true;
             glutPostRedisplay();
+            Mix_PlayChannel( -1, collision, 0 );
             break;
         //Letter 'p' or 'P'.
         case 80:
