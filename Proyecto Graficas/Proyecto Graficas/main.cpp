@@ -51,17 +51,17 @@ static GLuint texName[TEXTURE_COUNT];
 //SONIDO
 void playSound(){
 #ifdef DEBUG
-#ifdef ROBI
+#ifdef BALBINA
     std::string path = "/Users/Balbina/Documents/10mo semestre/Graficas computacionales/final/Proyecto-Graficas/Proyecto Graficas/Proyecto Graficas/sound";
 #else
-    std::string path = "/Users/Adrian/Copy/ITC/8to-Semestre/Graficas/midiot/MIDIot/piano/";
+    std::string path = "/Users/Carlos/ITC/8to-Semestre/Graficas/Proyecto-Graficas/Proyecto Graficas/Proyecto Graficas/sound";
 #endif
 #else
     std::string path = "sound/";
 #endif
     
     std::string cmd;
-    cmd = "afplay -q 1 " + path + "Explosion" + ".wav & exit";
+    cmd = "afplay " + path + "Explosion" + ".wav & exit";
     system(cmd.c_str());
 }
 
@@ -489,6 +489,7 @@ void JuanMovement(int tecla, int x, int y)
         case 32:
             hasFired = true;
             glutPostRedisplay();
+            playSound();
             break;
         //Letter 'p' or 'P'.
         case 80:
