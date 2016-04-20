@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37B0B2221CC7755200A67B87 /* Sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37B0B2201CC7755200A67B87 /* Sound.cpp */; };
+		37B0B2241CC775A700A67B87 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B0B2231CC775A700A67B87 /* OpenAL.framework */; };
 		37EAC3DB1C9A066600F20112 /* Drawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37EAC3D91C9A066600F20112 /* Drawable.cpp */; };
 		37EAC3DE1C9A0A9500F20112 /* Drug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37EAC3DC1C9A0A9500F20112 /* Drug.cpp */; };
 		37EAC3E11C9A0F8500F20112 /* Juan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37EAC3DF1C9A0F8500F20112 /* Juan.cpp */; };
@@ -29,6 +31,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		37B0B21E1CC774FD00A67B87 /* Explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Explosion.wav; sourceTree = "<group>"; };
+		37B0B21F1CC7752800A67B87 /* DigitalStream.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DigitalStream.wav; sourceTree = "<group>"; };
+		37B0B2201CC7755200A67B87 /* Sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sound.cpp; sourceTree = "<group>"; };
+		37B0B2211CC7755200A67B87 /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
+		37B0B2231CC775A700A67B87 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		37EAC3D81C9A051400F20112 /* Drawable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Drawable.h; sourceTree = "<group>"; };
 		37EAC3D91C9A066600F20112 /* Drawable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Drawable.cpp; sourceTree = "<group>"; };
 		37EAC3DC1C9A0A9500F20112 /* Drug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Drug.cpp; sourceTree = "<group>"; };
@@ -50,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37B0B2241CC775A700A67B87 /* OpenAL.framework in Frameworks */,
 				FD65A44D1C99371F005CF9C1 /* GLUT.framework in Frameworks */,
 				FD65A44B1C99371B005CF9C1 /* OpenGL.framework in Frameworks */,
 			);
@@ -61,6 +69,8 @@
 		FD2D33441CB4C8250060366D /* Clases */ = {
 			isa = PBXGroup;
 			children = (
+				37B0B2201CC7755200A67B87 /* Sound.cpp */,
+				37B0B2211CC7755200A67B87 /* Sound.h */,
 				37EAC3E21C9A10D400F20112 /* Hand.cpp */,
 				37EAC3E31C9A10D400F20112 /* Hand.h */,
 				37EAC3DF1C9A0F8500F20112 /* Juan.cpp */,
@@ -76,6 +86,7 @@
 		FD65A4371C9936F7005CF9C1 = {
 			isa = PBXGroup;
 			children = (
+				37B0B2231CC775A700A67B87 /* OpenAL.framework */,
 				FD2D33451CB4C8390060366D /* imageloader.h */,
 				FD65A44C1C99371F005CF9C1 /* GLUT.framework */,
 				FD65A44A1C99371B005CF9C1 /* OpenGL.framework */,
@@ -95,6 +106,8 @@
 		FD65A4421C9936F7005CF9C1 /* Proyecto Graficas */ = {
 			isa = PBXGroup;
 			children = (
+				37B0B21F1CC7752800A67B87 /* DigitalStream.wav */,
+				37B0B21E1CC774FD00A67B87 /* Explosion.wav */,
 				FD2D33461CB4C85C0060366D /* Texturas */,
 				FD65A4431C9936F7005CF9C1 /* main.cpp */,
 				FD2D33441CB4C8250060366D /* Clases */,
@@ -163,6 +176,7 @@
 				37EAC3DB1C9A066600F20112 /* Drawable.cpp in Sources */,
 				37EAC3E11C9A0F8500F20112 /* Juan.cpp in Sources */,
 				37EAC3E41C9A10D400F20112 /* Hand.cpp in Sources */,
+				37B0B2221CC7755200A67B87 /* Sound.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -24,7 +24,16 @@
 #include "Drug.h"
 #include "Juan.h"
 #include "Hand.h"
+#include "Sound.h"
 using namespace std;
+
+Sound sonido = Sound("/Users/Balbina/Documents/10mo semestre/Graficas computacionales/final/Proyecto-Graficas/Proyecto Graficas/Proyecto Graficas/DigitalStream.wav");
+
+void sound (int value){
+    sonido.PlaySound();
+    glutTimerFunc(4000,sound,0);
+    
+}
 
 //Apuntadores a las lista
 
@@ -575,6 +584,7 @@ int main(int argc, char *argv[])
     glutReshapeFunc(reshape);
     glutSpecialFunc(JuanMovement);
     glutTimerFunc(1000, welcome, 1);
+    glutTimerFunc(0,sound,0);
     glutMainLoop();
     return 0;
 }
