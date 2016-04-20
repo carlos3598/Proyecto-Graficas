@@ -29,6 +29,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		37B0B2171CC7147E00A67B87 /* DigitalStream.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DigitalStream.wav; sourceTree = "<group>"; };
+		37B0B2181CC7147E00A67B87 /* Explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Explosion.wav; sourceTree = "<group>"; };
 		37EAC3D81C9A051400F20112 /* Drawable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Drawable.h; sourceTree = "<group>"; };
 		37EAC3D91C9A066600F20112 /* Drawable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Drawable.cpp; sourceTree = "<group>"; };
 		37EAC3DC1C9A0A9500F20112 /* Drug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Drug.cpp; sourceTree = "<group>"; };
@@ -58,6 +60,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37B0B2161CC702E400A67B87 /* sound */ = {
+			isa = PBXGroup;
+			children = (
+				37B0B2171CC7147E00A67B87 /* DigitalStream.wav */,
+				37B0B2181CC7147E00A67B87 /* Explosion.wav */,
+			);
+			path = sound;
+			sourceTree = "<group>";
+		};
 		FD2D33441CB4C8250060366D /* Clases */ = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +106,7 @@
 		FD65A4421C9936F7005CF9C1 /* Proyecto Graficas */ = {
 			isa = PBXGroup;
 			children = (
+				37B0B2161CC702E400A67B87 /* sound */,
 				FD2D33461CB4C85C0060366D /* Texturas */,
 				FD65A4431C9936F7005CF9C1 /* main.cpp */,
 				FD2D33441CB4C8250060366D /* Clases */,
