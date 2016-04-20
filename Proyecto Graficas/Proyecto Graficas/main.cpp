@@ -52,8 +52,7 @@ const int TEXTURE_COUNT = 17; //17
 
 int state;
 static GLuint texName[TEXTURE_COUNT];
-
-Sound sonido = Sound("/Users/carlossalazar/Dropbox/ITC/10mo semestre/Graficas/Proyecto/Proyecto Graficas/Proyecto Graficas/DigitalStream.wav");
+Sound sonido = Sound("/Users/carlossalazar/Downloads/spaceinvaders1.wav");
 
 void sound (int value){
     if (!pause) {
@@ -544,7 +543,7 @@ void mytimer(int i){
         }
         
         if (!gameover) {
-            if (score == 2100){
+            if (score == 50){
                 gameover = true;
                 state = 8;
                 reshape(width, height);
