@@ -44,6 +44,24 @@ const int TEXTURE_COUNT = 15; //15
 int state = 0;
 static GLuint texName[TEXTURE_COUNT];
 
+
+//SONIDO
+void playSound(){
+#ifdef DEBUG
+#ifdef ROBI
+    std::string path = "/Users/Balbina/Documents/10mo semestre/Graficas computacionales/final/Proyecto-Graficas/Proyecto Graficas/Proyecto Graficas/sound";
+#else
+    std::string path = "/Users/Adrian/Copy/ITC/8to-Semestre/Graficas/midiot/MIDIot/piano/";
+#endif
+#else
+    std::string path = "sound/";
+#endif
+    
+    std::string cmd;
+    cmd = "afplay -q 1 " + path + "Explosion" + ".wav & exit";
+    system(cmd.c_str());
+}
+
 //le borramos el exceso para solo obtener el Path padre
 void getParentPath()
 {
