@@ -17,6 +17,8 @@
 #endif
 #include <iostream>
 #include <stdlib.h>
+#include <string>
+#include <sstream>
 #include <stdio.h>
 #include "imageloader.h"
 #include "Drug.h"
@@ -36,10 +38,11 @@ bool hasFired = false;
 int score;
 double posBackground;
 double posCharacterY;
+bool gameover = false;
 
 //__FILE__ is a preprocessor macro that expands to full path to the current file.
 string fullPath = __FILE__;
-const int TEXTURE_COUNT = 15; //15
+const int TEXTURE_COUNT = 17; //17
 
 int state;
 static GLuint texName[TEXTURE_COUNT];
@@ -50,6 +53,24 @@ void getParentPath()
     for (int i = (int)fullPath.length()-1; i>=0 && fullPath[i] != '/'; i--) {
         fullPath.erase(i,1);
     }
+}
+
+void drawText(float x, float y, std::string text, void* font, int r, int g, int b) {
+    glColor3ub(r, g, b);
+//    glRasterPos2f(x, y);
+    glRasterPos3f(x, y, -1.0f);
+    
+    for (std::string::iterator i = text.begin(); i != text.end(); ++i)
+    {
+        char c = *i;
+        glutBitmapCharacter(font, c);
+    }
+}
+
+std::string toString(int value) {
+    std::stringstream ss;
+    ss << value;
+    return ss.str();
 }
 
 //Makes the image into a texture, and returns the id of the texture
@@ -139,6 +160,12 @@ void initRendering()
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/juanito.bmp");
     image = loadBMP(ruta);loadTexture(image,i++);
     
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/gameover.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/gameover_exit.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
     delete image;
 }
 
@@ -149,6 +176,7 @@ void init()
     score = 0;
     posBackground = 0.1;
     posCharacterY = -1.4;
+    gameover = false;
     
     glClearColor(0, 0.19, 0.4, 1);
     // Para que las paredes se vean sólidas (no transparentes)
@@ -195,7 +223,6 @@ void dibuja()
     glClearColor(1.0,1.0,1.0,1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    
     if (state < 7) {
         
         //Habilitar el uso de texturas
@@ -218,7 +245,9 @@ void dibuja()
         glTexCoord2f(0.0f, 1.0f);
         glVertex3f(-2.0f, 2.0f, 0);
         glEnd();
-    }else{
+        
+    }else if (state == 7){
+        
         glClearColor(1.0,1.0,1.0,1.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -259,15 +288,57 @@ void dibuja()
         glPopMatrix();
         glColor3ub(255, 255, 255);
     
+        drawText(-1, -1, toString(score), GLUT_BITMAP_TIMES_ROMAN_24, 255, 255, 255);
+        drawText(-2, -1, "Puntaje:", GLUT_BITMAP_HELVETICA_18, 255, 255, 255);
 
     }
+    else if (state == 8 || state == 9) {
+        
+        glClearColor(1.0,1.0,1.0,1.0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        
+        
+        //Habilitar el uso de texturas
+        glEnable(GL_TEXTURE_2D);
+        
+        
+        //Elegir la textura del Quads: state cambia con el timer
+        glBindTexture(GL_TEXTURE_2D, texName[state + 7]);
+        
+        glBegin(GL_QUADS);
+        //Asignar la coordenada de textura 0,0 al vertice
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(-2.0f, -2.0f, -1.5f);
+        //Asignar la coordenada de textura 1,0 al vertice
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(2.0f, -2.0f, -1.5f);
+        //Asignar la coordenada de textura 1,1 al vertice
+        glTexCoord2f(1.0f,1.0f);
+        glVertex3f(2.0f, 2.0f, -1.5f);
+        //Asignar la coordenada de textura 0,1 al vertice
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(-2.0f, 2.0f, -1.5f);
+        glEnd();
+        
+        glDisable(GL_TEXTURE_2D);
+        
+        
+        //Background
+        glColor3ub(255, 255, 255);
+        
+        
+        drawText(-1.1, -1.2, toString(score), GLUT_BITMAP_TIMES_ROMAN_24, 255, 255, 255);
+        
+    }
+    
+    
     
     glutSwapBuffers();
 }
 
 void reshape(int ancho, int alto)
 {
-    if (state < 7) {
+    if (state < 7 || state == 8 || state == 9) {
         // Ventana
         glViewport(0, 0, ancho, alto);
         // Sistema de coordenadas
@@ -318,13 +389,18 @@ void JuanMovement(int tecla, int x, int y)
             if (state == 5) {
                 state = 6;
             }
-            juan.setX(juan.getX() + 0.1);
-            if (!hasFired) {
-                hand.setX(hand.getX() + 0.1);
+            if (state == 7) {
+                juan.setX(juan.getX() + 0.1);
+                if (!hasFired) {
+                    hand.setX(hand.getX() + 0.1);
+                }
+                if (juan.getX() > 1.8) {
+                    juan.setX(1.8);
+                    hand.setX(1.8);
+                }
             }
-            if (juan.getX() > 1.8) {
-                juan.setX(1.8);
-                hand.setX(1.8);
+            if (state == 8) {
+                state = 9;
             }
             glutPostRedisplay();
             break;
@@ -332,24 +408,29 @@ void JuanMovement(int tecla, int x, int y)
             if (state == 6) {
                 state = 5;
             }
-            juan.setX(juan.getX() - 0.1);
-            if (!hasFired) {
-                hand.setX(hand.getX() - 0.1);
+            if (state == 7) {
+                juan.setX(juan.getX() - 0.1);
+                if (!hasFired) {
+                    hand.setX(hand.getX() - 0.1);
+                }
+                if (juan.getX() < -1.8) {
+                    juan.setX(-1.8);
+                    hand.setX(-1.8);
+                }
             }
-            if (juan.getX() < -1.8) {
-                juan.setX(-1.8);
-                hand.setX(-1.8);
+            if (state == 9) {
+                state = 8;
             }
             glutPostRedisplay();
             break;
         case GLUT_KEY_UP:
-            if (state != 7) {
+            if (state != 7 && state != 5 && state != 6 && state != 8 && state != 9) {
                 changeState(-1);
             }
             glutPostRedisplay();
             break;
         case GLUT_KEY_DOWN:
-            if (state != 7) {
+            if (state != 7 && state != 5 && state != 6 && state != 8 && state != 9) {
                 changeState(+1);
             }
             glutPostRedisplay();
@@ -372,7 +453,17 @@ void JuanMovement(int tecla, int x, int y)
             }
             else if (state == 6){
                 state = 7;
+                reshape(640, 480);
                 pause = false;
+            }
+            else if (state == 8) {
+                init();
+                glutPostRedisplay();
+                pause = false;
+                state = 7;
+            }
+            else if (state == 9) {
+                exit(-1);
             }
             glutPostRedisplay();
             break;
@@ -429,6 +520,13 @@ void mytimer(int i){
                 }
             }
         }
+        
+        if (!gameover) {
+            if (score >= 20){
+                gameover = true;
+                state = 8;
+            }
+        }
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 6; j++) {
                 drugs[i][j].move(direction);
@@ -470,7 +568,7 @@ int main(int argc, char *argv[])
     glutInitWindowPosition(10,10);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH| GLUT_DOUBLE );
     getParentPath();
-    glutCreateWindow("Proyecto Graficas");
+    glutCreateWindow("JUANTIDRUGS 2016");
     init();
     initRendering();
     glutDisplayFunc(dibuja);
