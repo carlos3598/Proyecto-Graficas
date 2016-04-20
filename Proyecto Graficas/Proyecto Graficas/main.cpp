@@ -17,6 +17,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string>
 #include "imageloader.h"
 #include "Drug.h"
 #include "Juan.h"
@@ -27,8 +28,9 @@
 using namespace std;
 
 //Sonidos
-Mix_Chunk *background;
+Mix_Music *background;
 Mix_Chunk *collision;
+
 
 //Apuntadores a las lista
 
@@ -185,10 +187,11 @@ void init()
     
     SDL_Init(SDL_INIT_EVERYTHING);
     
+    
     // Initialize SDL_Mixer
     Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
     
-    background = Mix_LoadWAV("/Users/Balbina/Documents/10mo semestre/Graficas computacionales/final/Proyecto-Graficas/Proyecto Graficas/Proyecto Graficas/sounds/DigitalStream.wav");
+    background = Mix_LoadMUS("/Users/Balbina/Documents/10mo semestre/Graficas computacionales/final/Proyecto-Graficas/Proyecto Graficas/Proyecto Graficas/sounds/DigitalStream.wav");
     collision = Mix_LoadWAV("/Users/Balbina/Documents/10mo semestre/Graficas computacionales/final/Proyecto-Graficas/Proyecto Graficas/Proyecto Graficas/sounds/Explosion.wav");
     
 }
