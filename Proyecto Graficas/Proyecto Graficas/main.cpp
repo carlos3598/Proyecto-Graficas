@@ -470,6 +470,7 @@ void JuanMovement(int tecla, int x, int y)
                 glutPostRedisplay();
                 pause = false;
                 state = 7;
+                reshape(640, 480);
             }
             else if (state == 9) {
                 exit(-1);
@@ -534,6 +535,7 @@ void mytimer(int i){
             if (score >= 20){
                 gameover = true;
                 state = 8;
+                reshape(640, 480);
             }
         }
         for (int i = 0; i < 10; i++) {
