@@ -52,7 +52,7 @@ const int TEXTURE_COUNT = 17; //17
 
 int state;
 static GLuint texName[TEXTURE_COUNT];
-Sound sonido = Sound("/Users/carlossalazar/Downloads/spaceinvaders1.wav");
+Sound sonido = Sound("/Users/Balbina/Documents/10mo semestre/Graficas computacionales/final/Proyecto-Graficas/Proyecto Graficas/Proyecto Graficas/spaceinvaders1.wav");
 
 void sound (int value){
     if (!pause) {

@@ -36,6 +36,7 @@
 		37B0B2201CC7755200A67B87 /* Sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sound.cpp; sourceTree = "<group>"; };
 		37B0B2211CC7755200A67B87 /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
 		37B0B2231CC775A700A67B87 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		37B772CA1CC7F4BC004C8F59 /* spaceinvaders1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = spaceinvaders1.wav; sourceTree = "<group>"; };
 		37EAC3D81C9A051400F20112 /* Drawable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Drawable.h; sourceTree = "<group>"; };
 		37EAC3D91C9A066600F20112 /* Drawable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Drawable.cpp; sourceTree = "<group>"; };
 		37EAC3DC1C9A0A9500F20112 /* Drug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Drug.cpp; sourceTree = "<group>"; };
@@ -106,6 +107,7 @@
 		FD65A4421C9936F7005CF9C1 /* Proyecto Graficas */ = {
 			isa = PBXGroup;
 			children = (
+				37B772CA1CC7F4BC004C8F59 /* spaceinvaders1.wav */,
 				37B0B21F1CC7752800A67B87 /* DigitalStream.wav */,
 				37B0B21E1CC774FD00A67B87 /* Explosion.wav */,
 				FD2D33461CB4C85C0060366D /* Texturas */,
