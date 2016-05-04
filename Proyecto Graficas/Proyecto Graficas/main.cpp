@@ -616,7 +616,7 @@ void mytimer(int i){
         }
         
         if (!gameover) {
-            if (score == 50){
+            if (score >= 50){
                 gameover = true;
                 state = 8;
                 reshape(width, height);
