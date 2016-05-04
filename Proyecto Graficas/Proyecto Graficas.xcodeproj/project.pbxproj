@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37740E001CD98F3B00689F4F /* PlaySound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37740DFE1CD98F3B00689F4F /* PlaySound.cpp */; };
+		37740E031CD9901800689F4F /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37740E011CD9901800689F4F /* SDL2_mixer.framework */; };
+		37740E041CD9901800689F4F /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37740E021CD9901800689F4F /* SDL2.framework */; };
 		37B0B2221CC7755200A67B87 /* Sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37B0B2201CC7755200A67B87 /* Sound.cpp */; };
 		37B0B2241CC775A700A67B87 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B0B2231CC775A700A67B87 /* OpenAL.framework */; };
 		37EAC3DB1C9A066600F20112 /* Drawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37EAC3D91C9A066600F20112 /* Drawable.cpp */; };
@@ -31,6 +34,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		37740DFE1CD98F3B00689F4F /* PlaySound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlaySound.cpp; sourceTree = "<group>"; };
+		37740DFF1CD98F3B00689F4F /* PlaySound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaySound.h; sourceTree = "<group>"; };
+		37740E011CD9901800689F4F /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../../../../../../../../Library/Frameworks/SDL2_mixer.framework; sourceTree = "<group>"; };
+		37740E021CD9901800689F4F /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		37740E051CD9B4BF00689F4F /* pew.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pew.wav; sourceTree = "<group>"; };
+		37740E061CD9B6F100689F4F /* megaman8bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = megaman8bit.wav; sourceTree = "<group>"; };
 		37B0B21E1CC774FD00A67B87 /* Explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Explosion.wav; sourceTree = "<group>"; };
 		37B0B21F1CC7752800A67B87 /* DigitalStream.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DigitalStream.wav; sourceTree = "<group>"; };
 		37B0B2201CC7755200A67B87 /* Sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sound.cpp; sourceTree = "<group>"; };
@@ -58,6 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37740E031CD9901800689F4F /* SDL2_mixer.framework in Frameworks */,
+				37740E041CD9901800689F4F /* SDL2.framework in Frameworks */,
 				37B0B2241CC775A700A67B87 /* OpenAL.framework in Frameworks */,
 				FD65A44D1C99371F005CF9C1 /* GLUT.framework in Frameworks */,
 				FD65A44B1C99371B005CF9C1 /* OpenGL.framework in Frameworks */,
@@ -72,6 +83,8 @@
 			children = (
 				37B0B2201CC7755200A67B87 /* Sound.cpp */,
 				37B0B2211CC7755200A67B87 /* Sound.h */,
+				37740DFE1CD98F3B00689F4F /* PlaySound.cpp */,
+				37740DFF1CD98F3B00689F4F /* PlaySound.h */,
 				37EAC3E21C9A10D400F20112 /* Hand.cpp */,
 				37EAC3E31C9A10D400F20112 /* Hand.h */,
 				37EAC3DF1C9A0F8500F20112 /* Juan.cpp */,
@@ -87,6 +100,8 @@
 		FD65A4371C9936F7005CF9C1 = {
 			isa = PBXGroup;
 			children = (
+				37740E011CD9901800689F4F /* SDL2_mixer.framework */,
+				37740E021CD9901800689F4F /* SDL2.framework */,
 				37B0B2231CC775A700A67B87 /* OpenAL.framework */,
 				FD2D33451CB4C8390060366D /* imageloader.h */,
 				FD65A44C1C99371F005CF9C1 /* GLUT.framework */,
@@ -107,6 +122,8 @@
 		FD65A4421C9936F7005CF9C1 /* Proyecto Graficas */ = {
 			isa = PBXGroup;
 			children = (
+				37740E061CD9B6F100689F4F /* megaman8bit.wav */,
+				37740E051CD9B4BF00689F4F /* pew.wav */,
 				37B772CA1CC7F4BC004C8F59 /* spaceinvaders1.wav */,
 				37B0B21F1CC7752800A67B87 /* DigitalStream.wav */,
 				37B0B21E1CC774FD00A67B87 /* Explosion.wav */,
@@ -192,6 +209,7 @@
 			files = (
 				37EAC3DE1C9A0A9500F20112 /* Drug.cpp in Sources */,
 				FD65A4441C9936F7005CF9C1 /* main.cpp in Sources */,
+				37740E001CD98F3B00689F4F /* PlaySound.cpp in Sources */,
 				37EAC3DB1C9A066600F20112 /* Drawable.cpp in Sources */,
 				37EAC3E11C9A0F8500F20112 /* Juan.cpp in Sources */,
 				37EAC3E41C9A10D400F20112 /* Hand.cpp in Sources */,
@@ -284,6 +302,10 @@
 		FD65A4481C9936F7005CF9C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -295,6 +317,10 @@
 		FD65A4491C9936F7005CF9C1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

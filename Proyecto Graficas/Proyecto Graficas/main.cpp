@@ -25,6 +25,7 @@
 #include "Juan.h"
 #include "Hand.h"
 #include "Sound.h"
+#include "PlaySound.h"
 
 using namespace std;
 
@@ -54,11 +55,14 @@ int state;
 static GLuint texName[TEXTURE_COUNT];
 Sound sonido = Sound("/Users/Balbina/Documents/10mo semestre/Graficas computacionales/final/Proyecto-Graficas/Proyecto Graficas/Proyecto Graficas/spaceinvaders1.wav");
 
+PlaySound playSound;
+
 void sound (int value){
     if (!pause) {
-        sonido.PlaySound();
+        //sonido.PlaySound();
+        playSound.playBackgroundMusic();
     }
-    glutTimerFunc(4000,sound,0);
+    glutTimerFunc(40000,sound,0);
     
 }
 
@@ -492,6 +496,7 @@ void JuanMovement(int tecla, int x, int y)
         case 32:
             hasFired = true;
             glutPostRedisplay();
+            playSound.playSpaceBarSound();
             break;
         //Letter 'p' or 'P'.
         case 80:
@@ -536,6 +541,7 @@ void mytimer(int i){
                             hand.setX(juan.getX());
                             
                             score += (j + 1) * 10;
+                            playSound.playCrashSound();
                         }
                     }
                 }
