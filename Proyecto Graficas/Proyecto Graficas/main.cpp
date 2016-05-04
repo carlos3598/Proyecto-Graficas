@@ -24,8 +24,8 @@
 #include "Drug.h"
 #include "Juan.h"
 #include "Hand.h"
-#include "Sound.h"
 #include "PlaySound.h"
+#include "SOIL.h"
 
 using namespace std;
 
@@ -53,17 +53,15 @@ const int TEXTURE_COUNT = 17; //17
 
 int state;
 static GLuint texName[TEXTURE_COUNT];
-Sound sonido = Sound("/Users/Balbina/Documents/10mo semestre/Graficas computacionales/final/Proyecto-Graficas/Proyecto Graficas/Proyecto Graficas/spaceinvaders1.wav");
 
 PlaySound playSound;
 
 void sound (int value){
+
     if (!pause) {
-        //sonido.PlaySound();
         playSound.playBackgroundMusic();
     }
     glutTimerFunc(40000,sound,0);
-    
 }
 
 //le borramos el exceso para solo obtener el Path padre
@@ -92,40 +90,9 @@ std::string toString(int value) {
     return ss.str();
 }
 
-//Makes the image into a texture, and returns the id of the texture
-void loadTexture(Image* image,int k)
-{
-    
-    glBindTexture(GL_TEXTURE_2D, texName[k]); //Tell OpenGL which texture to edit
-    
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    
-    //Filtros de ampliacion y redución con cálculo mas cercano no es tan bueno pero es rápido
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,GL_NEAREST);
-    
-    //Filtros de ampliacion y redución con cálculo lineal es mejo pero son más calculos
-    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,GL_LINEAR);
-    
-    //Map the image to the texture
-    glTexImage2D(GL_TEXTURE_2D,                //Always GL_TEXTURE_2D
-                 0,                            //0 for now
-                 GL_RGB,                       //Format OpenGL uses for image
-                 image->width, image->height,  //Width and height
-                 0,                            //The border of the image
-                 GL_RGB, //GL_RGB, because pixels are stored in RGB format
-                 GL_UNSIGNED_BYTE, //GL_UNSIGNED_BYTE, because pixels are stored
-                 //as unsigned numbers
-                 image->pixels);               //The actual pixel data
-}
-
 void initRendering()
 {
     //Declaración del objeto Image
-    Image* image;
-    GLuint i=0;
     
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
@@ -134,58 +101,158 @@ void initRendering()
     
     char  ruta[200];
     
+    
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/welcome.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
+    texName[0] = SOIL_load_OGL_texture
+    (
+     ruta,
+     SOIL_LOAD_AUTO,
+     SOIL_CREATE_NEW_ID,
+     SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+     );
     
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/historia.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
+    texName[1] = SOIL_load_OGL_texture
+    (
+     ruta,
+     SOIL_LOAD_AUTO,
+     SOIL_CREATE_NEW_ID,
+     SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+     );
     
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/fondo_Inicio.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
+    texName[2] = SOIL_load_OGL_texture
+    (
+     ruta,
+     SOIL_LOAD_AUTO,
+     SOIL_CREATE_NEW_ID,
+     SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+     );
     
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/fondo_Instrucciones.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
+    texName[3] = SOIL_load_OGL_texture
+    (
+     ruta,
+     SOIL_LOAD_AUTO,
+     SOIL_CREATE_NEW_ID,
+     SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+     );
     
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/fondo_Salir.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
+    texName[4] = SOIL_load_OGL_texture
+    (
+     ruta,
+     SOIL_LOAD_AUTO,
+     SOIL_CREATE_NEW_ID,
+     SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+     );
     
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/instrucciones_regresar.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
-    
+    texName[5] = SOIL_load_OGL_texture
+    (
+     ruta,
+     SOIL_LOAD_AUTO,
+     SOIL_CREATE_NEW_ID,
+     SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+     );
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/instrucciones_iniciar.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
+    texName[6] = SOIL_load_OGL_texture
+    (
+     ruta,
+     SOIL_LOAD_AUTO,
+     SOIL_CREATE_NEW_ID,
+     SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+     );
     
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/maryjane.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
+    texName[7] = SOIL_load_OGL_texture
+    (
+     ruta,
+     SOIL_LOAD_AUTO,
+     SOIL_CREATE_NEW_ID,
+     SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+     );
     
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/molly.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
+    texName[8] = SOIL_load_OGL_texture
+    (
+     ruta,
+     SOIL_LOAD_AUTO,
+     SOIL_CREATE_NEW_ID,
+     SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+     );
     
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/shroom.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
+    texName[9] = SOIL_load_OGL_texture
+    (
+     ruta,
+     SOIL_LOAD_AUTO,
+     SOIL_CREATE_NEW_ID,
+     SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+     );
     
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/coke.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
+    texName[10] = SOIL_load_OGL_texture
+    (
+     ruta,
+     SOIL_LOAD_AUTO,
+     SOIL_CREATE_NEW_ID,
+     SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+     );
     
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/meth.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
+    texName[11] = SOIL_load_OGL_texture
+    (
+     ruta,
+     SOIL_LOAD_AUTO,
+     SOIL_CREATE_NEW_ID,
+     SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+     );
     
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/heroine.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
+    texName[12] = SOIL_load_OGL_texture
+    (
+     ruta,
+     SOIL_LOAD_AUTO,
+     SOIL_CREATE_NEW_ID,
+     SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+     );
     
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/hand.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
+    texName[13] = SOIL_load_OGL_texture
+    (
+     ruta,
+     SOIL_LOAD_AUTO,
+     SOIL_CREATE_NEW_ID,
+     SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+     );
     
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/juanito.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
+    texName[14] = SOIL_load_OGL_texture
+    (
+     ruta,
+     SOIL_LOAD_AUTO,
+     SOIL_CREATE_NEW_ID,
+     SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+     );
     
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/gameover.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
+    texName[15] = SOIL_load_OGL_texture
+    (
+     ruta,
+     SOIL_LOAD_AUTO,
+     SOIL_CREATE_NEW_ID,
+     SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+     );
     
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/gameover_exit.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
-    
-    delete image;
+    texName[16] = SOIL_load_OGL_texture
+    (
+     ruta,
+     SOIL_LOAD_AUTO,
+     SOIL_CREATE_NEW_ID,
+     SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+     );
 }
 
 //Initialize all the paramenters.
