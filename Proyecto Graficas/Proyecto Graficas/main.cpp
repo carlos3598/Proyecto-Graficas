@@ -49,7 +49,7 @@ int height = 480;
 
 //__FILE__ is a preprocessor macro that expands to full path to the current file.
 string fullPath = __FILE__;
-const int TEXTURE_COUNT = 17; //17
+const int TEXTURE_COUNT = 18; //17
 
 int state;
 static GLuint texName[TEXTURE_COUNT];
@@ -253,6 +253,15 @@ void initRendering()
      SOIL_CREATE_NEW_ID,
      SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
      );
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/fondo_Pausa.bmp");
+    texName[17] = SOIL_load_OGL_texture
+    (
+     ruta,
+     SOIL_LOAD_AUTO,
+     SOIL_CREATE_NEW_ID,
+     SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+     );
 }
 
 //Initialize all the paramenters.
@@ -419,6 +428,42 @@ void dibuja()
         drawText(-1.1, -1.2, toString(score), GLUT_BITMAP_TIMES_ROMAN_24, 255, 255, 255);
         
     }
+    else if(state == 17){
+        glClearColor(1.0,1.0,1.0,1.0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        
+        
+        //Habilitar el uso de texturas
+        glEnable(GL_TEXTURE_2D);
+        
+        
+        //Elegir la textura del Quads: state cambia con el timer
+        glBindTexture(GL_TEXTURE_2D, texName[17]);
+        
+        glBegin(GL_QUADS);
+        //Asignar la coordenada de textura 0,0 al vertice
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(-4.2f, -4.2f, -1.5f);
+        //Asignar la coordenada de textura 1,0 al vertice
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(4.2f, -4.2f, -1.5f);
+        //Asignar la coordenada de textura 1,1 al vertice
+        glTexCoord2f(1.0f,1.0f);
+        glVertex3f(4.2f, 4.2f, -1.5f);
+        //Asignar la coordenada de textura 0,1 al vertice
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(-4.2f, 4.2f, -1.5f);
+        glEnd();
+        
+        glDisable(GL_TEXTURE_2D);
+        
+        //Background
+        glColor3ub(255, 255, 255);
+        
+        
+        drawText(-2.2, -2.1, toString(score), GLUT_BITMAP_TIMES_ROMAN_24, 255, 255, 255);
+        
+    }
     
     
     
@@ -427,7 +472,7 @@ void dibuja()
 
 void reshape(int ancho, int alto)
 {
-    if (state < 7 || state == 8 || state == 9) {
+    if (state < 7 || state == 8 || state == 9 || state == 17) {
         // Ventana
         glViewport(0, 0, ancho, alto);
         // Sistema de coordenadas
@@ -569,6 +614,12 @@ void JuanMovement(int tecla, int x, int y)
         case 80:
         case 112:
             pause = !pause;
+            if (state == 7) {
+                state = 17;
+            }
+            else if (state == 17) {
+                state = 7;
+            }
             glutPostRedisplay();
             break;
         //Letter 'r' or 'R'.
